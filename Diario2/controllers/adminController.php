@@ -39,7 +39,7 @@ class adminController extends adminModel
             }
 
         }else{
-            $arr_app = array_merge($arr_app, ["login", "registro"]);
+            $arr_app = array_merge($arr_app, ["login", "signup"]);
             if(in_array($intro_app, $arr_app)){
                 return $intro_app.".php";
             }else{

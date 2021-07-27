@@ -1,0 +1,112 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-image: url("../public/img/diario.jpg");
+}
+
+.navegacion {
+    background: #786452;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #A5907E, #f7dad95b);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #A5907E, #f7dad95b);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-repeat: no-repeat;
+    height: 70px;
+    padding: 0px 10%;
+}
+
+.navegacion a {
+    /* background: red; */
+    height: 70px;
+    width: 100px;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.navegacion a img {
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.borde {
+    border: none;
+    border-radius: 15px;
+}
+
+.titulo {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.3rem;
+    color: white;
+}
+
+.input1 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 8px;
+    background-color: #f7dad95d;
+    border: none;
+    color: #550C18;
+    width: 100%;
+}
+
+.input1::placeholder {
+    color: rgba(224, 224, 224, 0.808);
+}
+
+
+/* ************************** CSS PARA LOGIN */
+
+.login-cuerpo {
+    /* background-color: aquamarine; */
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+}
+
+.login-cuerpo .contenido {
+    background-color: #443730c0;
+    /* display: inline; */
+    width: 400px;
+    padding: 30px;
+    color: whitesmoke;
+}
+
+.login-cuerpo a {
+    text-decoration: none;
+}
+
+.color_especial {
+    color: #F7DAD9;
+}
+
+.margenes {
+    margin: 10px 0px;
+}
+
+.centrar {
+    text-align: center;
+}
+
+.login-cuerpo div h1 {
+    color: whitesmoke;
+}
+
+.boton {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background: black;
+    cursor: pointer;
+}
+
+.boton:hover {
+    color: black;
+    background: white;
+}
