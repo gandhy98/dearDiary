@@ -9,6 +9,21 @@ if($conAjax){
 
 class adminController extends adminModel
 {
+    //le pasamos los valores qu nos estan pasando al admin model
+    public function registrar_Controll($data){
+        $dataModel = new stdClass;
+        $dataModel -> email = $data->txtCorreo;
+        $dataModel -> password = $data->txtPassword;
+        $dataModel -> nombre =$data->txtNombre;
+        $dataModel -> apellido = $data->txtApellido;
+        $dataModel -> fecha_nacimiento = '';
+        $dataModel -> url_foto = '';
+        $dataModel -> estado = 1;
+
+        $respuesta = adminModel::registrar_Model($dataModel);
+
+        return $respuesta;
+    }
     
 
     /**

@@ -14,18 +14,14 @@ function registarse() { //funcion para recojer los datos del form
     let txtPassword2 = document.querySelector(".txtPassword2").value;
 
 
-    console.log({
+
+    const jsonData = {
+        id: 'registro',
         txtNombre,
         txtApellido,
         txtCorreo,
         txtPassword,
         txtPassword2
-    });
-
-
-    jsonData = {
-        nombre: txtNombre,
-        numero: 20
     }
 
     //enviarlos al servidor apache para que se procese con PHP
@@ -39,10 +35,20 @@ function registarse() { //funcion para recojer los datos del form
             body: formData
         }).then(data => data.json())
         .then(data => {
-
+            /**
+             * esperamos el resultado en esta funcion
+             */
             console.log(data);
 
             alert(data)
+            document.querySelector(".txtNombre").value = "";
+            document.querySelector(".txtApellido").value = "";
+            document.querySelector(".txtCorreo").value = "";
+            document.querySelector(".txtPassword").value = "";
+            document.querySelector(".txtPassword2").value = "";
+
+            location.href = "?app=login";
+
 
         })
 

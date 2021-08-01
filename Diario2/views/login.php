@@ -37,7 +37,7 @@
             </nav>
             <p class="centrar">
                 ¿no tienes una cuenta? <br>
-                <a href='signup.html' class="color_especial">registrate</a> <br>
+                <a href='?app=signup' class="color_especial">registrate</a> <br>
                 <a href="forgot_password.html" class="color_especial">olvido su password?</a>
             </p>
 

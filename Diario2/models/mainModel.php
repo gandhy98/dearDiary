@@ -17,7 +17,7 @@ class mainModel
         return $link;
     }
 
-    /* Funcion para ejecutar una consulta simple, (Para provar) */
+    /* Funcion para ejecutar una consulta simple de la base o para que lo lea */
     public function ejecutar($query){
         $response = self::conexion_db()->prepare($query);
         $response->execute();

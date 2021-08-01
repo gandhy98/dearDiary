@@ -3,7 +3,7 @@
 
     <head>
         <?php
-            include_once("./views/pages/nav_session.hatml");
+            include_once("./views/modules/header.html");
         ?>
         <title>SIGN UP</title>
     </head>
