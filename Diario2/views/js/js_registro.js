@@ -26,21 +26,8 @@ function registarse() { //funcion para recojer los datos del form
 
     //enviarlos al servidor apache para que se procese con PHP
 
-    let formData = new FormData();
-
-    formData.append("data", JSON.stringify(jsonData));
-
-    fetch('./ajax/ajaxProcesar.php', {
-            method: 'POST',
-            body: formData
-        }).then(data => data.json())
-        .then(data => {
-            /**
-             * esperamos el resultado en esta funcion
-             */
-            console.log(data);
-
-            alert(data)
+    envio_ajax(jsonData, (res) => {
+            alert(res);
             document.querySelector(".txtNombre").value = "";
             document.querySelector(".txtApellido").value = "";
             document.querySelector(".txtCorreo").value = "";
@@ -48,8 +35,7 @@ function registarse() { //funcion para recojer los datos del form
             document.querySelector(".txtPassword2").value = "";
 
             location.href = "?app=login";
-
-
-        })
+        },
+        './ajax/ajaxProcesar.php');
 
 }
