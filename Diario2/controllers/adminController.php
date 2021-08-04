@@ -9,6 +9,15 @@ if($conAjax){
 
 class adminController extends adminModel
 {
+    public function login_Controller($data){
+        $dataModel = new stdClass();
+        $dataModel -> email = $data->logCorreo;
+        $dataModel -> password = $data -> logPassword;
+
+        $response = adminModel::login_Model($dataModel);
+
+        return $response;
+    }
     //le pasamos los valores qu nos estan pasando al admin model
     public function registrar_Controll($data){
         $dataModel = new stdClass;
@@ -45,7 +54,7 @@ class adminController extends adminModel
         
         if($this->verificar_session()){
 
-            $arr_app = array_merge($arr_app, ["perfil", "principal"]);
+            $arr_app = array_merge($arr_app, ["perfil", "principal","salir"]);
 
             if(in_array($intro_app, $arr_app)){
                 return $intro_app.".php";

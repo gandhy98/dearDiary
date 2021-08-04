@@ -15,12 +15,21 @@
     echo json_encode($obj_gandhy->testController($datos->nombre));*/
 
     if($datos->id === "registro"){
+
         $response = $obj_gandhy->registrar_Controller($datos);
+
+        echo json_encode($response);
+
+    }
+    
+    else if ($datos->id === "login"){
+
+        $response = $obj_gandhy->login_Controller($datos);
+
         echo json_encode($response);
     }
-    else if ($datos->id === "login"){
-        echo json_encode($datos);
-    }
+
     else{
+
         echo json_encode("el id no es valido");
     }

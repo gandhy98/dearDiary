@@ -27,11 +27,11 @@
             <nav>
                 <form action="../login.php" method="post" class="">
 
-                    <input type="email" class="input1" name="correo" placeholder="ingresa Gmail"> <br>
-                    <input type="password" class="input1 margenes" name="password" placeholder="ingresa password"> <br>
-                    <input type="checkbox" name="recuerdame"> <br>
+                    <input type="email" class="input1 logCorreo" name="correo" placeholder="ingresa Gmail"> <br>
+                    <input type="password" class="input1 margenes logPassword" name="password" placeholder="ingresa password"> <br>
+                    <!--<input type="checkbox" name="recuerdame"> <br>-->
                     <div class="margenes centrar">
-                        <input type="submit" class="boton" value="INGRESAR">
+                        <input type="submit" class="boton" onClick="ingresar_login()" value="INGRESAR">
                     </div>
                 </form>
             </nav>
