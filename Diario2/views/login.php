@@ -1,26 +1,23 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-
-<head>
+  <head>
+    
+    <!-- header links -->
     <?php
         include_once ("./views/modules/header.html");
     ?>
-    <title>LOGGIN | DIARY</title>
-</head>
-<body>
-    <!--encabezado -->
-    <!--<nav class="navegacion">
-        <a href="../../index.php">
-            <img src="../../imagenes/logo.png" width="50px">
-        </a>
-    </nav>-->
     
-    <?php
-        include_once ("./views/pages/nav_session.html");
-    ?>
+    <title>LOGGIN | DIARY</title>
+  </head>
+  <body>
+
 
     <!-- CONTENIDO DE LA PÁGINA -->
     <!-- Navegacion session -->
+    <?php
+        include_once ("./views/pages/nav_session.html");
+    ?>
+    
     <section class="login-cuerpo">
         <div class="contenido borde">
             <h1 class="titulo margenes centrar">INICIAR SECION</h1>
@@ -29,7 +26,7 @@
 
                     <input type="email" class="input1 logCorreo" name="correo" placeholder="ingresa Gmail"> <br>
                     <input type="password" class="input1 margenes logPassword" name="password" placeholder="ingresa password"> <br>
-                    <!--<input type="checkbox" name="recuerdame"> <br>-->
+                    <input type="checkbox" name="recuerdame"> <br>
                     <div class="margenes centrar">
                         <input type="submit" class="boton" onClick="ingresar_login()" value="INGRESAR">
                     </div>
@@ -37,7 +34,7 @@
             </nav>
             <p class="centrar">
                 ¿no tienes una cuenta? <br>
-                <a href='?app=signup' class="color_especial">registrate</a> <br>
+                <a href='signup.html' class="color_especial">registrate</a> <br>
                 <a href="forgot_password.html" class="color_especial">olvido su password?</a>
             </p>
 
@@ -48,11 +45,13 @@
         include_once ("./views/pages/footer.html");
     ?>
 
+
+
     <!-- Footer links -->
     <?php
         include_once ("./views/modules/footer.html");
     ?>
 
-</body>
 
+  </body>
 </html>

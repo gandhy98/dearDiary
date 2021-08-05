@@ -9,8 +9,9 @@
 <body>
 
     <h1>PAGINA PRINCIPAL</h1>
-
-    <a href="?app=salir">SALIR</a>
     
+    <a href="?app=salir">SALIR</a>
+    <a href="#">otros</a>
+
 </body>
 </html>

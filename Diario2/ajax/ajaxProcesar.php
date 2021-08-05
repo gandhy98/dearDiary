@@ -1,18 +1,13 @@
 <?php
-// para los procesos antes de pasarlo a php
+
     $conAjax = true;
 
-    $datos = json_decode($_POST["data"]); 
+    $datos = json_decode($_POST["datas"]);
 
     include_once("../controllers/adminController.php");
-    
 
     $obj_gandhy = new adminController();
 
-
-    /*$suma = 2 + $datos->numero;
-
-    echo json_encode($obj_gandhy->testController($datos->nombre));*/
 
     if($datos->id === "registro"){
 
@@ -22,14 +17,17 @@
 
     }
     
-    else if ($datos->id === "login"){
+    else if ($datos->id === "login") {
+        # code...
 
         $response = $obj_gandhy->login_Controller($datos);
-
+        
         echo json_encode($response);
     }
 
-    else{
+    else {
 
-        echo json_encode("el id no es valido");
+        echo json_encode("El id no es valido");
+
     }
+

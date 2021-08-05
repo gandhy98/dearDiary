@@ -1,6 +1,7 @@
-<?php 
-    session_destroy;
+<?php
+    
+    session_destroy();
 
-    header("Location: ?app=login" );
+    header("Location: ?app=login");
 
 ?>

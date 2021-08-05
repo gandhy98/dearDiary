@@ -1,5 +1,5 @@
 <?php
-//para que entre ala ruta adecuada
+
 $conAjax = is_null($conAjax)?false:$conAjax;
 if($conAjax){
     require_once "../models/adminModel.php";
@@ -9,17 +9,27 @@ if($conAjax){
 
 class adminController extends adminModel
 {
+
+    /**
+     * 
+     */
     public function login_Controller($data){
-        $dataModel = new stdClass();
-        $dataModel -> email = $data->logCorreo;
-        $dataModel -> password = $data -> logPassword;
+        $dataModel = new StdClass;
+        $dataModel->email = $data->logCorreo;
+        $dataModel->password = $data->logPassword;
 
         $response = adminModel::login_Model($dataModel);
 
         return $response;
+
     }
-    //le pasamos los valores qu nos estan pasando al admin model
-    public function registrar_Controll($data){
+
+
+    /**
+     * 
+     */
+    public function registrar_Controller($data){
+
         $dataModel = new stdClass;
         $dataModel -> email = $data->txtCorreo;
         $dataModel -> password = $data->txtPassword;
@@ -32,8 +42,10 @@ class adminController extends adminModel
         $respuesta = adminModel::registrar_Model($dataModel);
 
         return $respuesta;
+
     }
     
+
 
     /**
      * 
@@ -63,7 +75,7 @@ class adminController extends adminModel
             }
 
         }else{
-            $arr_app = array_merge($arr_app, ["login", "signup"]);
+            $arr_app = array_merge($arr_app, ["login", "registro"]);
             if(in_array($intro_app, $arr_app)){
                 return $intro_app.".php";
             }else{

@@ -3,7 +3,7 @@ console.log("se cargo js_registro.js")
 
 
 
-function registarse() { //funcion para recojer los datos del form
+function registarse() {
 
     event.preventDefault();
 
@@ -15,27 +15,51 @@ function registarse() { //funcion para recojer los datos del form
 
 
 
-    const jsonData = {
-        id: 'registro',
-        txtNombre,
-        txtApellido,
-        txtCorreo,
-        txtPassword,
-        txtPassword2
-    }
+    if(txtPassword === txtPassword2){
 
-    //enviarlos al servidor apache para que se procese con PHP
+        // Empaquetamos los datos del form
+        const jsonData = {
+            id:'registro',
+            txtNombre,
+            txtApellido,
+            txtCorreo,
+            txtPassword,
+            txtPassword2
+        }
+    
+    
+        envio_ajax(jsonData, (res) => {
+            /**
+             * result the server
+             */
+            console.log(res);
 
-    envio_ajax(jsonData, (res) => {
-            alert(res);
-            document.querySelector(".txtNombre").value = "";
-            document.querySelector(".txtApellido").value = "";
-            document.querySelector(".txtCorreo").value = "";
-            document.querySelector(".txtPassword").value = "";
-            document.querySelector(".txtPassword2").value = "";
+            if(res.val){
+                /** 
+                 * clear the form
+                */
+                document.querySelector(".txtNombre").value = "";            
+                document.querySelector(".txtApellido").value = "";            
+                document.querySelector(".txtCorreo").value = "";            
+                document.querySelector(".txtPassword").value = "";            
+                document.querySelector(".txtPassword2").value = "";      
+        
+                /**
+                 * redir an other page
+                 */
+                location.href = "?app=login";
 
-            location.href = "?app=login";
+            }else{
+                alert(res.msj);
+            }
+    
         },
         './ajax/ajaxProcesar.php');
+
+
+    
+    }else{
+        alert("el password no es el mismo")
+    }
 
 }

@@ -9,16 +9,19 @@ function ingresar_login() {
     const jsonData = {
         id: 'login',
         logCorreo,
-        logPassword
+        logPassword,
     }
 
     envio_ajax(jsonData, (res) => {
+           
             console.log(res);
 
-            document.querySelector(".logCorreo").value;
-            document.querySelector(".logPassword").value;
+            document.querySelector(".logCorreo").value = "";
+            document.querySelector(".logPassword").value = "";
 
-            location.href = "?app=principal";
+            // location.href = "?app=principal";
         },
         './ajax/ajaxProcesar.php');
+
+
 }
