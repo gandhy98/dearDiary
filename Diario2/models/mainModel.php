@@ -1,5 +1,5 @@
 <?php
-
+ //aqui hacemos las funciones
 $conAjax = is_null($conAjax)?false:$conAjax;
 if($conAjax){
     require_once "../core/configMain.php";

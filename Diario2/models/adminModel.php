@@ -1,5 +1,5 @@
 <?php
-
+ //hacemos las consultas a la base de datos
 $conAjax = is_null($conAjax)?false:$conAjax;
 if($conAjax){
     require_once "../models/mainModel.php";
