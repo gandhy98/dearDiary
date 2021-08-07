@@ -24,17 +24,18 @@
         
         echo json_encode($response);
     }
-    else if ($datos->id ==="salir"){
-        session_start();
 
+    else if($datos->id === "salir"){
+
+        session_start();
+        
         if(session_destroy()){
             $response = true;
-        }
-        else{
+        }else{
             $response = false;
         }
 
-        echo json_encode($response); //json_encode:para codificarlas respuestas
+        echo json_encode($response);
     }
 
     else {

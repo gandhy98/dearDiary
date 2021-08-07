@@ -20,5 +20,7 @@
         include_once ("./views/modules/footer.html");
     ?> 
 
+
+
 </body>
 </html>

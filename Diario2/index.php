@@ -13,9 +13,9 @@
 
     $obj = new adminController();
 
-    $app = empty($_GET) "portada" : $_GET["app"];
+    $app = empty($_GET)? "portada" : $_GET["app"]; 
 
-    $result_app = $obj -> pagina_Controller($_GET["app"]);
+    $result_app = $obj -> pagina_Controller($app);
 
     include_once("./views/$result_app"); //controlar entradas
     
