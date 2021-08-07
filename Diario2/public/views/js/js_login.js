@@ -13,15 +13,17 @@ function ingresar_login() {
     }
 
     envio_ajax(jsonData, (res) => {
-
+           
             console.log(res);
 
             document.querySelector(".logCorreo").value = "";
             document.querySelector(".logPassword").value = "";
-            if (res) {
+
+            if(res){
                 location.href = "?app=principal";
             }
-            // 
+
+            
         },
         './ajax/ajaxProcesar.php');
 
