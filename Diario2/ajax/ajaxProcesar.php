@@ -37,6 +37,15 @@
 
         echo json_encode($response);
     }
+    else if($datos->id === "entrarNotas"){
+        if( $datos->id == "entrarNotas"){
+            $response=true;
+        }
+        else{
+            $response=false;
+        }
+        echo json_encode($response);
+    }
 
     else {
 
