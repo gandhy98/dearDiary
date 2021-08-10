@@ -7,13 +7,13 @@ function salir() {
     const jsonData = {
         id: 'salir'
     }
-    
+
     envio_ajax(
-        jsonData, 
+        jsonData,
         (res) => {
-            
+
             console.log(res);
-            if(res){
+            if (res) {
                 location.href = "?app=login";
             }
 
@@ -23,6 +23,6 @@ function salir() {
 }
 
 
-function bichos(){
+function bichos() {
     alert("gandhychaaa!!!");
 }

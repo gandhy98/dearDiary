@@ -53,9 +53,12 @@ body {
     color: #550C18;
     width: 100%;
 }
+
 .input1::placeholder {
     color: rgba(224, 224, 224, 0.808);
 }
+
+
 /* ************************** CSS PARA LOGIN */
 
 .login-cuerpo {
