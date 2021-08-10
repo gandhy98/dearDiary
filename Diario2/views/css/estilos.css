@@ -98,8 +98,31 @@
     font-weight: lighter;
 }
 
-.btn:hover {
+.btn2:hover {
     background: #550C18;
+    color: white;
+    box-shadow: none !important;
+}
+
+.bton2 {
+    text-decoration: none;
+    color: white;
+    background-color: #A5907E;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 30px;
+    font-size: 1.1rem;
+    font-weight: lighter;
+}
+
+.bton2:hover {
+    background: #550C18;
+    color: white;
+    box-shadow: none !important;
+}
+
+.bton-close {
+    background-color: #4b0a00;
     color: white;
 }
 
