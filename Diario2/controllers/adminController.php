@@ -66,7 +66,7 @@ class adminController extends adminModel
         
         if($this->verificar_session()){
 
-            $arr_app = array_merge($arr_app, ["perfil", "principal","salir"]);
+            $arr_app = array_merge($arr_app, ["perfil", "principal","salir","notas"]);
 
             if(in_array($intro_app, $arr_app)){
                 return $intro_app.".php";
@@ -75,7 +75,7 @@ class adminController extends adminModel
             }
 
         }else{
-            $arr_app = array_merge($arr_app, ["login", "registro","principal","notas"]); //!!!eliminar el principal de aqui 
+            $arr_app = array_merge($arr_app, ["login", "registro"]); //!!!eliminar el principal de aqui 
             if(in_array($intro_app, $arr_app)){
                 return $intro_app.".php";
             }else{
