@@ -1,0 +1,29 @@
+.cuerpoPerfil {
+    background: #080808;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #A5907E, #f7dad95b);
+    /* Chrome 10-25, Safari 5.1-6 */
+    /*background: linear-gradient(to bottom, #A5907E, #f7dad95b);*/
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-repeat: no-repeat;
+    margin: 10px;
+    height: 200px;
+    padding: 200px 10%;
+}
+
+.contImagen {
+    background: #504848;
+    margin: -180px 1px;
+    padding: 150px 10%;
+}
+
+.botPosicion {
+    margin: 180px 0px;
+}
+
+.centro {
+    /*height: 100vh;*/
+    /*display: grid;*/
+    padding: 2px 8%;
+    margin: 0px 100px;
+}

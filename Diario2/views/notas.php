@@ -46,11 +46,17 @@
                         DETALLE DE LA NOTA
                     </label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+
+                    <!--insert img-->
+                    <div class="mb-3 col-md-12 margenes">
+                        <input class="form-control" accept="image" type="file">
+                    </div>
                 </div>
 
                 <div>
-                    <input type="submit" value="GUARDAR">
-                    <a href="../principal.php">cancelar</a>
+                    <input type="submit" value="PUBLICO">
+                    <input type="submit" value="PRIVADO">
+                    <a href="?app=principal">cancelar</a>
                 </div>
             </form> 
         </div>
@@ -74,3 +80,25 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
