@@ -110,3 +110,11 @@ body {
     color: black;
     background: white;
 }
+
+.contPreguntas {
+    background-color: #312723de;
+    /* display: inline; */
+    width: 400px;
+    padding: 30px;
+    color: rgb(163, 149, 149);
+}

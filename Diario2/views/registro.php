@@ -26,6 +26,12 @@
                     <input type="password" class="input1 margenes txtPassword" name="password" placeholder="crear password"> <br>
                     <input type="password" class="input1 margenes txtPassword2" name="confir_password" placeholder="confirme password"> <br>
 
+                    <label for="exampleFormControlInput1" class="form-label"> por si te olvidas tu contraseña...</label>
+                    <label for="exampleFormControlInput1" class="form-label">¿cual es tu color favorito?</label>
+                    <input type="text" class="input1 margenes txtNombre" value="" name="nombre" placeholder="color favorito" > <br>
+                    <label for="exampleFormControlInput1" class="form-label">¿nombre de tus mascota?</label>
+                    <input type="text" class="input1 margenes txtApellido" name="apellido" placeholder="nombre de tu mascota"> <br>
+
                     <div class="margenes centrar ">
                         <input type="submit" class="boton" onClick="registarse();" value="Registrate">
                     </div>

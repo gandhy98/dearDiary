@@ -35,8 +35,22 @@
             <p class="centrar">
                 ¿no tienes una cuenta? <br>
                 <a href='signup.html' class="color_especial">registrate</a> <br>
-                <a href="forgot_password.html" class="color_especial">olvido su password?</a>
+                <!--<a href="forgot_password.html" class="color_especial">olvido su password?</a>-->
             </p>
+                <!-- boton notas -->
+                <div class="margenes centrar">
+                    <button type="button" class="bton2 " data-bs-toggle="modal" 
+                        data-bs-target="#agregarNota"    
+                    >
+                        ¿olvido su password?
+                    </button>
+                </div>
+           
+            <!-- Modal agregar nota -->
+            <?php
+                include("./views/components/recuperarPass.html");
+            ?>
+
 
         </div>
     </section>

@@ -17,14 +17,17 @@
     ?>
     <!-- insert notes to dear diary -->
 
-    <div class="container pt-3">
+    <div class="container pt-3 ">
 
         <!-- boton notas -->
-        <button type="button" class="bton2" data-bs-toggle="modal" 
-            data-bs-target="#agregarNota"    
-        >
-            ¿tienes algo que contarme?
-        </button>
+        <div class="margenes centrar" >
+          <button type="button" class="bton2" data-bs-toggle="modal" 
+              data-bs-target="#agregarNota"    
+          >
+              ¿tienes algo que contarme?
+          </button>
+        </div>
+        
 
         <!-- Modal agregar nota -->
         <?php
