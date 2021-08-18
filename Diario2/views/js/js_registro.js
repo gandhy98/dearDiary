@@ -84,7 +84,7 @@ function registarse() {
                     /**
                      * redir an other page
                      */
-                    location.href = "?app=preguntaPass";
+                    location.href = "?app=login";
 
                 } else {
                     alert(res.msj);

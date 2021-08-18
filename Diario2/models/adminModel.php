@@ -10,15 +10,25 @@ if($conAjax){
 class adminModel extends mainModel
 {
 
+    private function consultar_registro(){
+        return $res;
+    }
+
     public function insertPregunta_model($data){
         $val = false;
         $msj = "No se inserto";
 
-        $query = "INSERT INTO usuarioretrive_password (pregunta,respuesta,estado,usuario_idusuario)
-            VALUES('cual es tu color favorito','{$data->respuesta1}','{$data->estado}',15),
-            ('cual es el nombre de tu mascota','{$data->respuesta2}','{$data->estado}',15)
-            ";
-            
+        //si ya existe
+        // $res = $this->consultar_registro($data->id);
+        // if($res == true ){
+                    // }   
+
+        $query = "INSERT INTO 
+                    retrive_password (pregunta,respuesta,estado,usuario_idusuario)
+                    VALUES
+                    ('cual es tu color favorito','{$data->respuesta1}','{$data->estado}',{$data->idusuario}),
+                    ('cual es el nombre de tu mascota','{$data->respuesta2}','{$data->estado}',{$data->idusuario})
+                ";
         
         $res = mainModel::ejecutar($query);
 

@@ -6,7 +6,6 @@
         <?php
             include_once ("./views/modules/header.html");
         ?>
-        
         <title>PERFIL | DIARY</title>
 </head>
 <body>
@@ -123,6 +122,13 @@
             </section>
         </div>
     </div>
+
+
+    <!-- MODALES -->
+    <?php
+        include("./views/components/preguntas.html");
+    ?>
+
 
     <!-- Footer links -->
     <?php

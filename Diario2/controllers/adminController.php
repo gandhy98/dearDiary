@@ -10,10 +10,12 @@ if($conAjax){
 class adminController extends adminModel
 {
    
-    public function insertPregunta($data){
+    public function insertPregunta_Controller($data){
         $dataModel = new stdClass;
-        $dataModel->respuesta = $data-> txtPregunta1;
-        $dataModel->respuesta = $data-> txtPregunta2;
+        $dataModel->respuesta1 = $data-> txtColor;
+        $dataModel->respuesta2 = $data-> txtMascota;
+        session_start();
+        $dataModel->idusuario = $_SESSION['data']['idusuario'];
         $dataModel->estado= 1;
 
         

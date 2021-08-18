@@ -16,6 +16,15 @@
         echo json_encode($response);
 
     }
+
+    elseif ($datos->id === "addQuestion") {
+        # code...
+        
+        $response = $obj_gandhy->insertPregunta_Controller($datos);
+
+        echo json_encode($response);
+        // echo json_encode($datos);
+    }
     
     else if ($datos->id === "insertPregunta"){
 
