@@ -1,7 +1,44 @@
 console.log("se cargo js_registro.js")
 
 
+function insertPregunta() {
+    event.preventDefault();
+    let txtPregunta1 = document.querySelector(".txtPregunta1").value;
+    let txtPregunta2 = document.querySelector(".txtPregunta2").value;
 
+    const jsonData = {
+        id: 'insertPregunta',
+        txtPregunta1,
+        txtPregunta2
+    }
+
+    envio_ajax(jsonData, (res) => {
+            /**
+             * result the server
+             */
+            console.log(res);
+
+            if (res.val) {
+                /** 
+                 * clear the form
+                 */
+                document.querySelector(".txtPregunta1").value = "";
+                document.querySelector(".txtPregunta2").value = "";
+
+                /**
+                 * redir an other page
+                 */
+                location.href = "?app=login";
+
+            } else {
+                alert(res.msj);
+            }
+
+        },
+        './ajax/ajaxProcesar.php');
+
+
+}
 
 function registarse() {
 
@@ -32,7 +69,7 @@ function registarse() {
                 /**
                  * result the server
                  */
-                console.log(res);
+                // console.log(res);
 
                 if (res.val) {
                     /** 
@@ -47,7 +84,7 @@ function registarse() {
                     /**
                      * redir an other page
                      */
-                    location.href = "?app=login";
+                    location.href = "?app=preguntaPass";
 
                 } else {
                     alert(res.msj);

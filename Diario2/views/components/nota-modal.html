@@ -15,33 +15,36 @@
 
 
 
-                <form action="../notas.php" method="post">
+                <form action="#" method="post">
                     <div class="row g-3">
                         <div class="mb-3 col-6">
                             <label for="exampleFormControlInput1" class="form-label">Titulo</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" name="titulo" placeholder="INGREAR TITULO">
+                            <input type="text" class="form-control txtTitulo" id="exampleFormControlInput1" name="titulo" placeholder="INGREAR TITULO">
 
                         </div>
                         <div class="mb-3 col-6">
                             <label for="exampleFormControlInput1" class="form-label">FECHA</label>
-                            <input type="date" class="form-control" name="fecha" id="exampleFormControlInput1">
+                            <input type="timestamp" class="form-control txtFecha" name="fecha" id="exampleFormControlInput1">
+                            <!--falta llamar a la insercion-->
                         </div>
                         <div class="mb-3 col-md-12">
                             <label for="exampleFormControlTextarea1" class="form-label" name="descripcion">
                         DETALLE DE LA NOTA
                     </label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                            <textarea class="form-control txtDescripcion" id="exampleFormControlTextarea1" rows="5"></textarea>
 
                             <!--insert img-->
                             <div class="mb-3 col-md-12 margenes">
-                                <input class="form-control" accept="image" type="file">
+                                <input class="form-control txtImagen" accept="image" type="file">
                             </div>
                         </div>
 
                         <div>
                             <input type="submit" class="btn" onclick="entrarNotas();" value="NOTAS">
-                            <input type="submit" class="btn" onclick="" value="PUBLICA">
-                            <input type="submit" class="btn" onclick="" value="PRIVADO">
+                            <input type="submit" class="btn" onclick="insertarNotas()" value="PUBLICA">
+                            <!--hacer los clicks-->
+                            <input type="submit" class="btn" onclick="privada()" value="PRIVADO">
+                            <!--hacer los clicks-->
                             <button type="button" class="btn bton-close" data-bs-dismiss="modal">Cerrar</button>
                             <!-- <button type="button" class="btn-close" data-bs-dismiss="modal">cancelar</button> -->
                         </div>

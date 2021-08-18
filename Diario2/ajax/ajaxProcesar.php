@@ -17,6 +17,14 @@
 
     }
     
+    else if ($datos->id === "insertPregunta"){
+
+        $response = $obj_gandhy->insertPregunta_Controller($datos);
+
+        echo json_encode($response);
+    }
+
+    
     else if ($datos->id === "login") {
         # code...
 
@@ -44,6 +52,12 @@
         else{
             $response=false;
         }
+        echo json_encode($response);
+    }
+
+    else if($datos->id === "insertarNotas"){
+        $response = $obj_gandhy->insertarNotas_Controller($datos);
+
         echo json_encode($response);
     }
 

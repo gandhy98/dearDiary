@@ -22,7 +22,7 @@
         <div class="contenido borde">
             <h1 class="titulo margenes centrar">INICIAR SECION</h1>
             <nav>
-                <form action="../login.php" method="post" class="">
+                <form action="#" method="post" class="">
 
                     <input type="email" class="input1 logCorreo" name="correo" placeholder="ingresa Gmail"> <br>
                     <input type="password" class="input1 margenes logPassword" name="password" placeholder="ingresa password"> <br>
@@ -34,13 +34,13 @@
             </nav>
             <p class="centrar">
                 ¿no tienes una cuenta? <br>
-                <a href='signup.html' class="color_especial">registrate</a> <br>
+                <a href='?app=registro' class="color_especial">registrate</a> <br>
                 <!--<a href="forgot_password.html" class="color_especial">olvido su password?</a>-->
             </p>
                 <!-- boton notas -->
                 <div class="margenes centrar">
                     <button type="button" class="bton2 " data-bs-toggle="modal" 
-                        data-bs-target="#agregarNota"    
+                        data-bs-target="#recuperarPassword"    
                     >
                         ¿olvido su password?
                     </button>

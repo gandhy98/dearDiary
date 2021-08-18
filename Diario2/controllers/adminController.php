@@ -9,7 +9,18 @@ if($conAjax){
 
 class adminController extends adminModel
 {
+   
+    public function insertPregunta($data){
+        $dataModel = new stdClass;
+        $dataModel->respuesta = $data-> txtPregunta1;
+        $dataModel->respuesta = $data-> txtPregunta2;
+        $dataModel->estado= 1;
 
+        
+        $response = adminModel::insertPregunta_Model($dataModel);
+
+        return $response;
+    }
     /**
      * 
      */
@@ -23,7 +34,6 @@ class adminController extends adminModel
         return $response;
 
     }
-
 
     /**
      * 
@@ -75,7 +85,7 @@ class adminController extends adminModel
             }
 
         }else{
-            $arr_app = array_merge($arr_app, ["login", "registro"]); //!!!eliminar el principal de aqui 
+            $arr_app = array_merge($arr_app, ["login", "registro","preguntaPass"]);
             if(in_array($intro_app, $arr_app)){
                 return $intro_app.".php";
             }else{

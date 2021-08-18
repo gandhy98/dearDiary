@@ -1,4 +1,4 @@
-<div class="  modal fade" id="agregarNota" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="  modal fade" id="recuperarPassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class=" modal-dialog">
         <div class=" contPreguntas borde modal-content">
             <div class="modal-header">
@@ -15,6 +15,34 @@
                     <input type="text" class="input1 margenes txtApellido" name="apellido" placeholder="nombre de tu mascota"> <br>
 
                     <!-- manada a modificar el password-->
+                    <div class="margenes centrar">
+                        <button type="button" class="bton2 " data-bs-toggle="modal" data-bs-target="#nuevoPassword">
+                            siguiente
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="  modal fade" id="nuevoPassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class=" modal-dialog">
+        <div class=" contPreguntas borde modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title " id="exampleModalLabel">recuperar password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form action="#" method="post" class="">
+                    <label for="exampleFormControlInput1" class="form-label">escriba su nueva contraseña</label>
+                    <input type="text" class="input1 margenes txtNombre" value="" name="nombre" placeholder="password"> <br>
+                    <label for="exampleFormControlInput1" class="form-label">confirmar password</label>
+                    <input type="text" class="input1 margenes txtApellido" name="apellido" placeholder="confirmar password"> <br>
+
+                    <!--modifica el password-->
                     <div class="margenes centrar ">
                         <input type="submit" class="boton" onClick="" value="siguiente">
                     </div>

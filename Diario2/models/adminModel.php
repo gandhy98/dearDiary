@@ -10,6 +10,26 @@ if($conAjax){
 class adminModel extends mainModel
 {
 
+    public function insertPregunta_model($data){
+        $val = false;
+        $msj = "No se inserto";
+
+        $query = "INSERT INTO usuarioretrive_password (pregunta,respuesta,estado,usuario_idusuario)
+            VALUES('cual es tu color favorito','{$data->respuesta1}','{$data->estado}',15),
+            ('cual es el nombre de tu mascota','{$data->respuesta2}','{$data->estado}',15)
+            ";
+            
+        
+        $res = mainModel::ejecutar($query);
+
+        if( $res->rowCount() > 0 ){
+            $val = true;
+            $msj = "Se inserto";
+        }
+
+        return ["val" => $val, "msj" => $msj];
+
+    }
     /**
      * 
      */
@@ -29,6 +49,9 @@ class adminModel extends mainModel
                     $_SESSION["app"] = true;
                     $_SESSION["data"] = $usuario;
                     $session = true;
+                }
+                else{
+                    alert("revise el correo o password");    
                 }
                 
             }

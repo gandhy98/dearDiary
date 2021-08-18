@@ -21,7 +21,7 @@
 
         <!-- boton notas -->
         <div class="margenes centrar" >
-          <button type="button" class="bton2" data-bs-toggle="modal" 
+          <button type="button" class="bton2 centro" data-bs-toggle="modal" 
               data-bs-target="#agregarNota"    
           >
               ¿tienes algo que contarme?
