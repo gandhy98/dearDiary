@@ -25,15 +25,7 @@
         echo json_encode($response);
         // echo json_encode($datos);
     }
-    
-    else if ($datos->id === "insertPregunta"){
 
-        $response = $obj_gandhy->insertPregunta_Controller($datos);
-
-        echo json_encode($response);
-    }
-
-    
     else if ($datos->id === "login") {
         # code...
 
@@ -75,4 +67,4 @@
         echo json_encode("El id no es valido");
 
     }
-
+    
