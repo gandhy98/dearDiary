@@ -9,13 +9,18 @@ if($conAjax){
 
 class adminModel extends mainModel
 {
-
     private function consultar_registro($idusuario){
-        $query = "SELECT * FROM retrive_password WHERE usuari_idusuario='$idusuario'";
+        $query = "SELECT * FROM retrive_password WHERE usuario_idusuario='$idusuario'";
 
-        $res = mainModel::ejecutar($query);
+        $res_query = mainModel::ejecutar($query);
         
-        return $res;
+        $res = false;
+
+        if($res_query->rowCount() >= 1){
+            $res = true;
+        }
+
+        return ["eval"=>$res];
     }
 
     public function insertPregunta_model($data){
@@ -25,8 +30,9 @@ class adminModel extends mainModel
         //si ya existe
         
         $verificar = $this->consultar_registro($data->idusuario);
-        if($verificar==true ){
-
+        
+        if($verificar["eval"] == true){
+            
             $val = false;
             $msj = "ya existe";
 
@@ -51,6 +57,7 @@ class adminModel extends mainModel
             
         }  
         else{
+
             $query = "INSERT INTO 
                     retrive_password (pregunta,respuesta,estado,usuario_idusuario)
                     VALUES
@@ -65,7 +72,28 @@ class adminModel extends mainModel
                 $msj = "Se inserto";
             }
         }
+
         return ["val" => $val, "msj" => $msj];
+    }
+
+
+    /**
+     * 
+     */
+    private function verifyEmail_Model($data){
+        $val= false;
+        $msj = "no existe";
+        $query = "SELECT * FROM usuario WHERE email='{$data->email}'";
+
+        $verEmail = mainModel::ejecutar($query);
+
+        if($verEmail-> rowCount() > 0){
+            $val= true;
+            $msj = "si existe";
+        }
+    
+        return ["val" => $val, "msj" => $msj];
+
     }
     /**
      * 
@@ -82,7 +110,7 @@ class adminModel extends mainModel
             while ($usuario = $res->fetch(PDO::FETCH_ASSOC)) {
                 # code...
                 if(mainModel::verificar_password($data->password, $usuario["password"])){
-                    session_start();
+                    // session_start();
                     $_SESSION["app"] = true;
                     $_SESSION["data"] = $usuario;
                     $session = true;
@@ -93,13 +121,8 @@ class adminModel extends mainModel
                 
             }
         }
-
-
         return $session;
-
     }
-
-
     /**
      * 
      */
@@ -134,7 +157,6 @@ class adminModel extends mainModel
             }
         }
         return ["val" => $val, "msj" => $msj];
-    }
-    
+    }    
 }
 

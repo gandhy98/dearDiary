@@ -1,0 +1,47 @@
+<!-- Button trigger modal -->
+<!-- 
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarPreguntas">
+        PREGUNTAS
+    </button> 
+-->
+
+
+
+<div class="  modal fade" id="agregarPreguntas" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class=" modal-dialog">
+        <div class=" contPreguntas borde modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">recuperar password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form action="#" method="post" class="">
+                    <label for="exampleFormControlInput1" class="form-label"> 
+                        responde las siguientes preguntas
+                    </label>
+                    <br>
+
+                    <label for="exampleFormControlInput1" class="form-label">
+                        ¿cual es tu color favorito?
+                    </label>
+                    <input type="text" class="input1 margenes txtColor" value="" name="nombre" placeholder="color favorito">
+                    <br>
+
+                    <label for="exampleFormControlInput1" class="form-label">
+                        ¿nombre de tus mascota?
+                    </label>
+                    <input type="text" class="input1 margenes txtMascota" name="apellido" placeholder="nombre de tu mascota"> <br>
+
+                    <!-- manada a modificar el password-->
+                    <div class="margenes centrar">
+                        <button type="button" class="bton2 " onClick="agrearPreguntas();">
+                            Guardar
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
