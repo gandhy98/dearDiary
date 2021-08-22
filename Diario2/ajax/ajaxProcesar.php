@@ -42,6 +42,33 @@
         echo json_encode($response);
     }
 
+    elseif ($datos-> id === "editarPerfil"){
+        $datos-> imgPerfil = $_FILES["img_perfil"];
+        $result =new stdClass;
+
+        $datos->url_foto = $_SESSION["data"]["idusuario"]."_".time().".jpg";
+
+        $resperfil= $obj_gandhy -> editarPerfil_controller($datos);
+
+        $result->msj[] = $resPerfil["msj"]:
+        $result->msj[] = $resPerfil["eval"]:
+
+        if($resPerfil["eval"]){
+            $msj = "No se guardo imagen";
+            $eval = false;
+            $resultado = move_uploaded_file($datos->imgPerfil['tmp_name'], "./../views/public/img_perfil/" . "{$datos->url_foto}");
+            if($resultado){
+                $eval = true;
+                $msj = "Se guardo imagen";
+            }
+            
+            $result->msj[] = $msj;
+            $result->eval = $eval;
+        }
+
+        echo json_encode($result);
+    }
+
     elseif ($datos->id === "insert-nota") {
         # code...
         // recepcionando la imagen de la nota

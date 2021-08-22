@@ -10,6 +10,19 @@ if($conAjax){
 class adminController extends adminModel
 {
 
+    public function editarPerfil_controller($data){
+        $dataModel = new stdClass;
+        $dataModel->nombre = $data->nombre;
+        $dataModel->apellido = $data->apellido;
+        $postfecha= new DateTime(fecha_nacimiento) -> format('Y-m-d');
+        $dataModel->fecha_nacimiento=$data->$postfecha;
+        $dataModel->url_foto = $data->url_foto;
+
+        $res = self::editarPerfil_Model($dataModel);
+
+        return $res;
+
+    }
     /**
      * 
      */

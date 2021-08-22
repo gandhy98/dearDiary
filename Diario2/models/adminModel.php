@@ -9,7 +9,38 @@ if($conAjax){
 
 class adminModel extends mainModel
 {
+    protected function consultar_datoUsuario(){
+        
+    }
 
+    protected function editarPerfil_Model(){
+        $eval = false;
+        $msj = "No se inserto";
+
+        $verificar = $this->consultar_datoUsuario($data->idusuario);
+        
+
+            $query = "INSERT INTO 
+                    nota
+                    SET
+                    titulo = '{$data->nombre }',
+                    contenido = '{$data->apellido}',
+                    fecha_publicacion = {$data->fecha_nacimiento},
+                    url_foto = '{$data->url_foto}',
+                ";
+             
+            $res = mainModel::ejecutar($query);
+
+            if( $res->rowCount() > 0 ){
+                $eval = false;
+                $msj = "No se inserto la nota";
+                $val = true;
+                $msj = "Se inserto";
+            }
+
+        return ["eval"=>$eval, "msj"=>$msj];
+  
+    }
     /**
      * 
      */

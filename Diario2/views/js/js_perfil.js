@@ -3,25 +3,33 @@ console.log("se cargo js_perfil.js")
 
 function EditarPerfil() {
     event.preventDefault();
-    let txtImg = getElementById("txtPerImg");
-    let txtPerNombre = document.querySelector(".txtPerNombre").value;
-    let txtPerApellido = document.querySelector(".txtPerApellido").value;
-    let txtPerFecha = document.querySelector(".txtPerFecha").value;
+    let Nombre = document.querySelector(".txtPerNombre").value
+    let Apellido = document.querySelector(".txtPerApellido").value
+        //let fecha_nacimiento = document.querySelector(".xtPerFecha ")
+    let img_perfil = document.querySelector(".img_perfil").files[0]
 
-    console.log(txtImg);
-    const jsonData = {
-        id: 'EditarPerfil',
-        txtImg,
-        txtPerNombre,
-        txtPerApellido,
-        txtPerFecha
-    }
+    //console.log(txtImg);
 
-    envio_ajax(jsonData, (res) => {
+    envioFile_ajax("POST", {
+            id: 'editarPerfil',
+            Nombre,
+            Apellido
+        }, {
+            img_perfil
+        },
+        res => {
+            console.log(res);
 
-        document.getElementById("imgPreview").src = event.target.result;
+            if (res.eval) {
+                alert(res.msj[0]);
+            } else {
+                alert(res.msj[0]);
+            }
 
-    }, './ajax/ajaxProcesar.php');
+        },
+        './ajax/ajaxProcesar.php'
+    );
+
 }
 
 /**
