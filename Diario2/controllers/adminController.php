@@ -9,12 +9,58 @@ if($conAjax){
 
 class adminController extends adminModel
 {
-   
+
+    /**
+     * 
+     */
+    public function obtenerNotasPublicas_Controller(){
+        $result = self::obtenerNotasPublicas_Model();
+        return $result;
+    }
+
+
+
+
+    /**
+     * 
+     */
+    public function insertarNota_Controller($data){
+
+        $dataModel = new StdClass;
+
+        $dataModel->titulo = $data->titulo;
+        $dataModel->contenido = $data->contenido;
+        $dataModel->fecha_publicacion = "current_timestamp()";
+        $dataModel->url_foto = $data->url_foto;
+        $dataModel->estado = $data->estado;
+        $dataModel->usuario_idusuario = $_SESSION['data']['idusuario'];
+
+        $res = self::insertarNota_Model($dataModel);
+
+        return $res;
+
+    }
+
+
+    /**
+     * 
+     */
+    public function verifyEmail_Controller($data){
+        $dataModel = new stdClass;
+        //verificaremos si necesitamos la session
+        $dataModel -> email = $data-> txtVerificarCorreo;
+
+        $response = adminModel::verifyEmail_Model($dataModel);
+
+        return $response;
+    }
+    /**
+     * 
+     */
     public function insertPregunta_Controller($data){
         $dataModel = new stdClass;
         $dataModel->respuesta1 = $data-> txtColor;
         $dataModel->respuesta2 = $data-> txtMascota;
-        //session_start();
         $dataModel->idusuario = $_SESSION['data']['idusuario'];
         $dataModel->estado= 1;
 
@@ -78,7 +124,7 @@ class adminController extends adminModel
         
         if($this->verificar_session()){
 
-            $arr_app = array_merge($arr_app, ["perfil", "principal","salir","notas"]);
+            $arr_app = array_merge($arr_app, ["perfil", "principal","salir","notas", "m_test/main"]);
 
             if(in_array($intro_app, $arr_app)){
                 return $intro_app.".php";
@@ -87,7 +133,7 @@ class adminController extends adminModel
             }
 
         }else{
-            $arr_app = array_merge($arr_app, ["login", "registro","preguntaPass"]);
+            $arr_app = array_merge($arr_app, ["login", "registro","recuperarPass"]);
             if(in_array($intro_app, $arr_app)){
                 return $intro_app.".php";
             }else{

@@ -40,7 +40,7 @@
                 <!-- boton notas -->
                 <div class="margenes centrar">
                     <button type="button" class="bton2 " data-bs-toggle="modal" 
-                        data-bs-target="#recuperarPassword"    
+                        data-bs-target="#verificarCorreo"    
                     >
                         ¿olvido su password?
                     </button>

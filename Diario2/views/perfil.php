@@ -11,7 +11,9 @@
 <body>
     <!-- Footer pages -->
     <?php
+        //var_dump($_SESSION['data']['nombre']);
         include_once ("./views/pages/nav_principal.html");
+
     ?>
 
 

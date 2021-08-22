@@ -10,12 +10,73 @@ if($conAjax){
 class adminModel extends mainModel
 {
 
-    private function consultar_registro($idusuario){
-        $query = "SELECT * FROM retrive_password WHERE usuari_idusuario='$idusuario'";
-
-        $res = mainModel::ejecutar($query);
+    /**
+     * 
+     */
+    protected function obtenerNotasPublicas_Model(){
+        $eval = false;
+        $data_res = [];
+        $msj_sys = "No se obtuvo las notas";
         
-        return $res;
+        $query = "SELECT nota.*, usuario.nombre, usuario.apellido, usuario.url_foto FROM nota inner join usuario on nota.usuario_idusuario = usuario.idusuario WHERE nota.estado = 2";
+
+        $res_query = mainModel::ejecutar($query);
+        if($res_query->rowCount() >= 1){
+            while ($elem_doc = $res_query->fetch(PDO::FETCH_ASSOC)) {
+                $data_res[] = $elem_doc;
+            }
+            $eval = true;
+            $msj_sys = "Se obtenieron la notas";
+        }
+        return ['eval'=>$eval, 'data'=>$data_res, 'msj'=>$msj_sys ];
+
+    }
+
+
+
+    /**
+     * 
+     */
+    protected function insertarNota_Model($data){
+        $eval = false;
+        $msj = "No se inserto la nota";
+
+        $query = "INSERT INTO 
+                    nota
+                    SET
+                    titulo = '{$data->titulo}',
+                    contenido = '{$data->contenido}',
+                    fecha_publicacion = {$data->fecha_publicacion},
+                    url_foto = '{$data->url_foto}',
+                    estado = '{$data->estado}',
+                    usuario_idusuario = '{$data->usuario_idusuario}'
+                ";
+             
+        $res = mainModel::ejecutar($query);
+
+        if( $res->rowCount() > 0 ){
+            $eval = true;
+            $msj = "Se inserto la nota";
+        }
+
+        return ["eval"=>$eval, "msj"=>$msj];
+
+    }
+
+
+
+    private function consultar_registro($idusuario){
+        $query = "SELECT * FROM retrive_password WHERE usuario_idusuario='$idusuario'";
+
+        $res_query = mainModel::ejecutar($query);
+        
+        $res = false;
+
+        if($res_query->rowCount() >= 1){
+            $res = true;
+        }
+
+        return ["eval"=>$res];
     }
 
     public function insertPregunta_model($data){
@@ -25,8 +86,9 @@ class adminModel extends mainModel
         //si ya existe
         
         $verificar = $this->consultar_registro($data->idusuario);
-        if($verificar==true ){
-
+        
+        if($verificar["eval"] == true){
+            
             $val = false;
             $msj = "ya existe";
 
@@ -51,6 +113,7 @@ class adminModel extends mainModel
             
         }  
         else{
+
             $query = "INSERT INTO 
                     retrive_password (pregunta,respuesta,estado,usuario_idusuario)
                     VALUES
@@ -65,7 +128,28 @@ class adminModel extends mainModel
                 $msj = "Se inserto";
             }
         }
+
         return ["val" => $val, "msj" => $msj];
+    }
+
+
+    /**
+     * 
+     */
+    private function verifyEmail_Model($data){
+        $val= false;
+        $msj = "no existe";
+        $query = "SELECT * FROM usuario WHERE email='{$data->email}'";
+
+        $verEmail = mainModel::ejecutar($query);
+
+        if($verEmail-> rowCount() > 0){
+            $val= true;
+            $msj = "si existe";
+        }
+    
+        return ["val" => $val, "msj" => $msj];
+
     }
     /**
      * 
@@ -82,7 +166,7 @@ class adminModel extends mainModel
             while ($usuario = $res->fetch(PDO::FETCH_ASSOC)) {
                 # code...
                 if(mainModel::verificar_password($data->password, $usuario["password"])){
-                    session_start();
+                    // session_start();
                     $_SESSION["app"] = true;
                     $_SESSION["data"] = $usuario;
                     $session = true;
@@ -93,13 +177,8 @@ class adminModel extends mainModel
                 
             }
         }
-
-
         return $session;
-
     }
-
-
     /**
      * 
      */
@@ -134,7 +213,6 @@ class adminModel extends mainModel
             }
         }
         return ["val" => $val, "msj" => $msj];
-    }
-    
+    }    
 }
 

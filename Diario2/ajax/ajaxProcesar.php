@@ -1,5 +1,7 @@
 <?php
 
+    session_start();
+
     $conAjax = true;
 
     $datos = json_decode($_POST["datas"]);
@@ -17,7 +19,13 @@
 
     }
 
-    elseif ($datos->id === "addQuestion") {
+    else if ($datos->id === "verifyEmail"){
+        
+        $response = $obj_gandhy->verifyEmail_Controller($datos);
+
+        echo json_encode($datos);
+    }
+    else if ($datos->id === "addQuestion") {
         # code...
         
         $response = $obj_gandhy->insertPregunta_Controller($datos);
@@ -34,9 +42,39 @@
         echo json_encode($response);
     }
 
+    elseif ($datos->id === "insert-nota") {
+        # code...
+        // recepcionando la imagen de la nota
+        $datos->imgNota = $_FILES["img_nota"];
+
+        $result = new StdClass;
+
+        $datos->url_foto = $_SESSION["data"]["idusuario"] ."_". time() . ".jpg";
+        
+        $resnota = $obj_gandhy -> insertarNota_Controller($datos);
+
+        $result->msj[] = $resnota["msj"];
+        $result->eval = $resnota["eval"];
+        
+        if($resnota["eval"]){
+            $msj = "No se guardo imagen";
+            $eval = false;
+            $resultado = move_uploaded_file($datos->imgNota['tmp_name'], "./../public/img_note/" . "{$datos->url_foto}");
+            if($resultado){
+                $eval = true;
+                $msj = "Se guardo imagen";
+            }
+            
+            $result->msj[] = $msj;
+            $result->eval = $eval;
+        }
+
+        echo json_encode($result);
+    }
+
     else if($datos->id === "salir"){
 
-        session_start();
+        // session_start();
         
         if(session_destroy()){
             $response = true;
@@ -67,4 +105,4 @@
         echo json_encode("El id no es valido");
 
     }
-    
+

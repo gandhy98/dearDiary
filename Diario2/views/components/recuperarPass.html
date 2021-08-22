@@ -1,4 +1,5 @@
-<div class="  modal fade" id="recuperarPassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--verificar el correo del usuario-->
+<div class="  modal fade" id="verificarCorreo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class=" modal-dialog">
         <div class=" contPreguntas borde modal-content">
             <div class="modal-header">
@@ -8,48 +9,17 @@
             <div class="modal-body">
 
                 <form action="#" method="post" class="">
-                    <label for="exampleFormControlInput1" 
-                        class="form-label"
-                    > 
-                        responde las siguientes preguntas
-                    </label>
-                    
-                    <label for="exampleFormControlInput1" class="form-label">
-                        ¿cual es tu correo?
-                    </label>
-                    <input type="email" 
-                        class="input1 margenes txtNombre" 
-                        value="" 
-                        name="email" 
-                        placeholder="Ingresa tu Email"
-                    > 
-                    <br>
+
 
                     <label for="exampleFormControlInput1" class="form-label">
-                        ¿cual es tu color favorito?
+                        ¿introdusca su correo?
                     </label>
-                    <input type="text" 
-                        class="input1 margenes txtNombre" 
-                        value="" 
-                        name="nombre" 
-                        placeholder="color favorito"
-                    > 
+                    <input type="email" class="input1 margenes txtVerificarCorreo" value="" name="email" placeholder="Ingresa tu Email">
                     <br>
-
-                    <label for="exampleFormControlInput1" 
-                        class="form-label"
-                    >
-                        ¿nombre de tus mascota?
-                    </label>
-                    <input type="text" 
-                        class="input1 margenes txtApellido" 
-                        name="apellido" 
-                        placeholder="nombre de tu mascota"
-                    > <br>
 
                     <!-- manada a modificar el password-->
                     <div class="margenes centrar">
-                        <button type="button" class="bton2 " data-bs-toggle="modal" data-bs-target="#nuevoPassword">
+                        <button type="button" class="bton2 " data-bs-toggle="modal" onClick="verficaCorreo();" data-bs-target="#preguntaPassword">
                             siguiente
                         </button>
                     </div>
@@ -59,21 +29,27 @@
         </div>
     </div>
 </div>
-
-<div class="  modal fade" id="nuevoPassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--hacer las preguntas-->
+<div class="  modal fade" id="preguntaPassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class=" modal-dialog">
         <div class=" contPreguntas borde modal-content">
             <div class="modal-header">
-                <h5 class="modal-title " id="exampleModalLabel">recuperar password</h5>
+                <h5 class="modal-title " id="exampleModalLabel">responde las siguientes preguntas</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
                 <form action="#" method="post" class="">
-                    <label for="exampleFormControlInput1" class="form-label">escriba su nueva contraseña</label>
-                    <input type="text" class="input1 margenes txtNombre" value="" name="nombre" placeholder="password"> <br>
-                    <label for="exampleFormControlInput1" class="form-label">confirmar password</label>
-                    <input type="text" class="input1 margenes txtApellido" name="apellido" placeholder="confirmar password"> <br>
+                    <label for="exampleFormControlInput1" class="form-label">
+                        ¿cual es tu color favorito?
+                    </label>
+                    <input type="text" class="input1 margenes txtNombre" value="" name="nombre" placeholder="color favorito">
+                    <br>
+
+                    <label for="exampleFormControlInput1" class="form-label">
+                        ¿nombre de tus mascota?
+                    </label>
+                    <input type="text" class="input1 margenes txtApellido" name="apellido" placeholder="nombre de tu mascota"> <br>
 
                     <!--modifica el password-->
                     <div class="margenes centrar ">

@@ -1,12 +1,14 @@
 console.log("se cargo js_perfil.js")
 
+
 function EditarPerfil() {
     event.preventDefault();
-    let txtImg = document.getElementById("txtImg").files[0];
+    let txtImg = getElementById("txtPerImg");
     let txtPerNombre = document.querySelector(".txtPerNombre").value;
     let txtPerApellido = document.querySelector(".txtPerApellido").value;
     let txtPerFecha = document.querySelector(".txtPerFecha").value;
 
+    console.log(txtImg);
     const jsonData = {
         id: 'EditarPerfil',
         txtImg,

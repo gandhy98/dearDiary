@@ -18,35 +18,69 @@
                 <form action="#" method="post">
                     <div class="row g-3">
                         <div class="mb-3 col-6">
-                            <label for="exampleFormControlInput1" class="form-label">Titulo</label>
-                            <input type="text" class="form-control txtTitulo" id="exampleFormControlInput1" name="titulo" placeholder="INGREAR TITULO">
+                            <label for="exampleFormControlInput1" class="form-label">
+                                Titulo
+                            </label>
+                            <input type="text" 
+                                class="form-control txt_titulo" 
+                                id="exampleFormControlInput1" 
+                                name="titulo" 
+                                placeholder="INGREAR TITULO"  >
 
                         </div>
                         <div class="mb-3 col-6">
-                            <label for="exampleFormControlInput1" class="form-label">FECHA</label>
-                            <input type="timestamp" class="form-control txtFecha" name="fecha" id="exampleFormControlInput1">
+                            <label for="exampleFormControlInput1" class="form-label">
+                                FECHA
+                            </label>
+                            <input type="date" 
+                                class="form-control txtFecha" 
+                                name="fecha" 
+                                id="exampleFormControlInput1"   >
                             <!--falta llamar a la insercion-->
                         </div>
                         <div class="mb-3 col-md-12">
                             <label for="exampleFormControlTextarea1" class="form-label" name="descripcion">
                         DETALLE DE LA NOTA
                     </label>
-                            <textarea class="form-control txtDescripcion" id="exampleFormControlTextarea1" rows="5"></textarea>
+                            <textarea class="form-control txt_contenido" 
+                                id="exampleFormControlTextarea1" 
+                                rows="5"    >
+                            </textarea>
 
-                            <!--insert img-->
+                            <!--imagen-->
                             <div class="mb-3 col-md-12 margenes">
-                                <input class="form-control txtImagen" accept="image" type="file">
+                                <input 
+                                    class="form-control img_nota" 
+                                    accept="image/*" 
+                                    type="file" >
                             </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input check_estado" 
+                                    type="checkbox" 
+                                    value="" 
+                                    id="flexCheckDefault"   >
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    privado
+                                </label>
+                            </div>
+
                         </div>
 
                         <div>
-                            <input type="submit" class="btn" onclick="entrarNotas();" value="NOTAS">
-                            <input type="submit" class="btn" onclick="insertarNotas()" value="PUBLICA">
                             <!--hacer los clicks-->
-                            <input type="submit" class="btn" onclick="privada()" value="PRIVADO">
-                            <!--hacer los clicks-->
-                            <button type="button" class="btn bton-close" data-bs-dismiss="modal">Cerrar</button>
-                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal">cancelar</button> -->
+                            <button type="button" 
+                                class="btn " 
+                                data-bs-dismiss="modal" 
+                            >
+                                Cerrar
+                            </button>
+                            <button type="button" 
+                                class="btn bton-close"
+                                onclick="insertarNotas()"
+                            >
+                                Publicar
+                            </button>
                         </div>
                     </div>
                 </form>
