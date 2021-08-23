@@ -11,6 +11,46 @@ class adminController extends adminModel
 {
 
     /**
+     * MODULO VISITA PERFIL
+     */
+    public function obtenerPerfilVisita_Controller($idusuario_v){
+        $dataModel = new StdClass;
+        $dataModel->idusuario = $idusuario_v;
+        
+        $result = self::obtenerUsuario_Model($dataModel->idusuario);
+
+        return $result;
+    }
+
+
+    /**
+     * MODULO COMENTARIOS
+     */
+
+    public function insertarComentario_Controller($data){
+        $dataModel = new StdClass;
+        $dataModel -> contenido = $data->txt_comentario;
+        $dataModel -> usuario_idusuario = $_SESSION["data"]["idusuario"];
+        $dataModel -> nota_idnota = $data->txt_idnota;
+
+        $res = self::insertarComentario_Model($dataModel);
+
+        return $res;
+    }
+
+    public function getComentariosNota_Controller($data){
+        $dataModel = new StdClass;
+        $dataModel -> nota_idnota = $data->idnota;
+
+        $res = self::getComentariosNota_Model($dataModel);
+
+        return $res;
+    }
+
+
+
+
+    /**
      * 
      */
     public function updateUrlFoto_Controller(){
@@ -150,7 +190,7 @@ class adminController extends adminModel
         
         if($this->verificar_session()){
 
-            $arr_app = array_merge($arr_app, ["perfil", "principal","salir","notas", "m_test/main"]);
+            $arr_app = array_merge($arr_app, ["perfil_visit","perfil", "principal","salir","notas", "m_test/main"]);
 
             if(in_array($intro_app, $arr_app)){
                 return $intro_app.".php";

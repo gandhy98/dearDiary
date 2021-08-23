@@ -46,35 +46,60 @@
               
               // var_dump($resnotas['data'][0]);
 
-              $notas = $resnotas['data'];
-            ?>
+              if($resnotas["eval"]){
 
-            <?php
-
-              foreach ($notas as $nota) {
-                # code...
-                // var_dump($nota);
-
+                $notas = $resnotas['data'];
+                foreach ($notas as $nota) {
+                  # code...
+                  // var_dump($nota);
             ?>
 
             <div class="col">
               <div class="card">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="./public/img_note/<?= $nota['url_foto'] ?>" 
+                  class="card-img-top " 
+                  height="100%"
+                  alt="..."
+                >
                 <div class="card-body">
+                  <small class="text-muted"><?= $nota['fecha_publicacion'] ?></small>
                   <h5 class="card-title"><?= $nota['titulo'] ?></h5>
                   <p class="card-text">
                     <?= $nota['contenido'] ?>
                   </p>
                 </div>
                   <div class="card-footer">
-                      <small class="text-muted"><?= $nota['fecha_publicacion'] ?></small>
+                    <span>
+                      <a href="#" class="">
+                        <img src="./views/public/icons/like.png" 
+                          width="25px"
+                          alt=""
+                        >
+                      </a>
+                        +5
+                    </span>
+
+                    <span>
+                      <a href="#" 
+                        class=""
+                        data-bs-toggle="modal" data-bs-target="#coments_diary"
+                        onclick="imprimirComentarios(<?= $nota['idnota'] ?>)"
+                      >
+                        <img src="./views/public/icons/comentario.png" 
+                          width="25px"
+                          alt=""
+                        >
+                      </a>  
+                    </span>
                   </div>
-              </div>
+                </div>
+
             </div>
 
             <?php
+              } // FIN DEL FOREACH
 
-              }
+            }else {
 
             ?>
 
@@ -84,11 +109,13 @@
               <div class="card">
                 <img src="..." class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  <h5 class="card-title">INSERTAR TU NUEVA NOTA</h5>
+                  <p class="card-text">
+                    Pon los detalles de tu nota aqu;i
+                  </p>
                 </div>
                   <div class="card-footer">
-                      <small class="text-muted">Last updated 3 mins ago</small>
+                      <small class="text-muted">...</small>
                   </div>
               </div>
             </div>
@@ -96,27 +123,22 @@
               <div class="card">
                 <img src="..." class="card-img-top" alt="...">
                 <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. lorem100</p>
+                  <h5 class="card-title">Insertar otra nota aquí</h5>
+                  <p class="card-text">
+                    Dale click al boton de arriba para crear una nueva nota
+                  </p>
                 </div>
                   <div class="card-footer">
-                      <small class="text-muted">Last updated 3 mins ago</small>
+                      <small class="text-muted">...</small>
                   </div>
               </div>
             </div>
-            <div class="col">
-              <div class="card">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-                  <div class="card-footer">
-                      <small class="text-muted">Last updated 3 mins ago</small>
-                  </div>
-              </div>
-            </div>
-          </div>
+
+            <?php
+            
+            } //FIN DEL ELSE
+
+            ?>
 
 
         </section>
@@ -125,11 +147,19 @@
 
 
     </div>
+      
+    <div class="py-4">
+    </div>
 
+
+    <!-- Modales -->
+    <?php
+        include_once ("./views/components/modal-coments.html");
+    ?>
 
     <!-- Footer pages -->
     <?php
-        //include_once ("./views/pages/footer.html");
+        include_once ("./views/pages/footer.html");
     ?>
 
 

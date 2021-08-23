@@ -1,0 +1,74 @@
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#coments_diary">
+    Launch demo modal
+</button>
+   -->
+  <!-- Modal -->
+  <div class="modal fade" id="coments_diary" tabindex="-1" aria-labelledby="coments_diaryLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="coments_diaryLabel">Comentarios de la Nota</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <!-- ESTO GUARDA EL ID DE LA NOTA SELECCIONADA -->
+            <input type="hidden" class="txt_idnota" placeholder="el id nota elegido"> <br>
+
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" 
+                    class="form-label ">
+                    INSERTE COMENTARIO
+                </label>
+                <textarea 
+                    class="form-control txt_comentario" 
+                    id="exampleFormControlTextarea1" 
+                    rows="3" 
+                ></textarea>
+            </div>
+
+            <button
+                class="btn btn-sm" 
+                onclick="agregarComentarioNota()"
+            >
+                COMENTAR
+            </button>
+
+            <hr>
+
+            <div class="list-group contenedor_comentarios">
+
+                <!-- <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">List group item heading</h5>
+                    <small>
+                        <img src="./public/img_perfil/test.jpg" width="50px" class="border-radius rounded " alt="">
+                    </small>
+                    </div>
+                    <p class="mb-1">Some placeholder content in a paragraph.</p>
+                    <small>And some small print.</small>
+                </a>
+
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">List group item heading</h5>
+                    <small class="text-muted">3 days ago</small>
+                    </div>
+                    <p class="mb-1">Some placeholder content in a paragraph.</p>
+                    <small class="text-muted">And some muted small print.</small>
+                </a> -->
+
+            </div>
+
+
+
+        
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>

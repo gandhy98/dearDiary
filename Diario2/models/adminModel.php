@@ -11,6 +11,66 @@ class adminModel extends mainModel
 {
 
     /**
+     * MODIULO COMENTARIOS
+     */
+
+    protected function insertarComentario_Model($data){
+        $data_res = [];
+        $eval = false;
+        $msj_sys = [];
+
+        $msj_sys["m1"] = "No se inserto comentario";
+
+        $query = "INSERT comentario SET 
+                    contenido = '$data->contenido',
+                    usuario_idusuario = '$data->usuario_idusuario',
+                    nota_idnota = '$data->nota_idnota'
+                ";
+
+        $res_query = mainModel::ejecutar($query);
+
+        if($res_query->rowCount() >= 1){
+            $eval = true;
+            $msj_sys["m1"] = "Se inserto comentario";
+        }
+
+        return [ "eval"=>$eval, "msj"=>$msj_sys, "data"=>$data_res ];
+
+    }
+
+
+    protected function getComentariosNota_Model($data){
+        $data_res = [];
+        $eval = false;
+        $msj_sys = [];
+
+        $msj_sys["m1"] = "No hay comentarios";
+
+        $query = "SELECT  comentario.contenido, usuario.idusuario, usuario.nombre, usuario.apellido, usuario.url_foto 
+                    FROM comentario INNER JOIN usuario 
+                    ON comentario.usuario_idusuario = usuario.idusuario
+                    WHERE nota_idnota = '$data->nota_idnota'
+                ";
+
+        $res_query = mainModel::ejecutar($query);
+
+        if($res_query->rowCount() >= 1){
+            $eval = true;
+            $msj_sys["m1"] = "hay comentarios";
+            while ($registro =  $res_query->fetch(PDO::FETCH_ASSOC)) {
+                # code...
+                $data_res[] = $registro;
+            }
+
+        }
+
+        return [ "eval"=>$eval, "msj"=>$msj_sys, "data"=>$data_res ];
+
+    }
+
+
+
+    /**
      * 
      */
     protected function updateUrlFoto_Model($data){
@@ -121,7 +181,12 @@ class adminModel extends mainModel
         $data_res = [];
         $msj_sys = "No se obtuvo las notas";
         
-        $query = "SELECT nota.*, usuario.nombre, usuario.apellido, usuario.url_foto FROM nota inner join usuario on nota.usuario_idusuario = usuario.idusuario WHERE nota.estado = 2";
+        $query = "SELECT nota.*, usuario.nombre, usuario.apellido, usuario.url_foto as url_foto_user 
+                    FROM nota inner join usuario 
+                    on nota.usuario_idusuario = usuario.idusuario 
+                    WHERE nota.estado = 2 
+                    ORDER BY nota.fecha_publicacion DESC
+                ";
 
         $res_query = mainModel::ejecutar($query);
         if($res_query->rowCount() >= 1){
@@ -236,7 +301,7 @@ class adminModel extends mainModel
     /**
      * 
      */
-    private function verifyEmail_Model($data){
+    protected function verifyEmail_Model($data){
         $val= false;
         $msj = "no existe";
         $query = "SELECT * FROM usuario WHERE email='{$data->email}'";

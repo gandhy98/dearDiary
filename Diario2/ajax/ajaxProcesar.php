@@ -19,6 +19,21 @@
 
     }
 
+    /**
+     * INSERTANDO COMENTARIOS
+     */
+    elseif ($datos->id === "insertar-comentario") {
+        # code...
+        $response = $obj_gandhy -> insertarComentario_Controller($datos);
+        echo json_encode($response);
+    }
+
+    elseif ($datos->id === "obtener-comentarios") {
+        # code...
+        $res = $obj_gandhy -> getComentariosNota_Controller($datos);
+        echo json_encode($res);
+    }
+
     elseif ($datos->id === "upload-fotoPerfil") {
         # code...
         $datos->foto = $_FILES["img_foto"];
