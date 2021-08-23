@@ -10,19 +10,38 @@ if($conAjax){
 class adminController extends adminModel
 {
 
-    public function editarPerfil_controller($data){
+    /**
+     * 
+     */
+    public function updateUrlFoto_Controller(){
+        $dataModel = new StdClass;
+        $dataModel->idusuario = $_SESSION['data']['idusuario'];
+        $dataModel->url_foto = "perfil_{$_SESSION['data']['idusuario']}.jpg";
+
+        $res = self::updateUrlFoto_Model($dataModel);
+
+        return $res;
+    }
+
+    /**
+     * 
+     */
+    public function updatePerfilData_Controller($data){
         $dataModel = new stdClass;
         $dataModel->nombre = $data->nombre;
         $dataModel->apellido = $data->apellido;
-        $postfecha= new DateTime(fecha_nacimiento) -> format('Y-m-d');
-        $dataModel->fecha_nacimiento=$data->$postfecha;
-        $dataModel->url_foto = $data->url_foto;
+        $dataModel->email = trim($data->email); 
+        $dataModel->fecha_nacimiento = $data->fecha_nacimiento;
 
-        $res = self::editarPerfil_Model($dataModel);
+        $dataModel->idusuario = $_SESSION["data"]["idusuario"];
+
+
+        $res = self::updatePerfilData_Model($dataModel);
 
         return $res;
 
     }
+
     /**
      * 
      */
@@ -30,10 +49,6 @@ class adminController extends adminModel
         $result = self::obtenerNotasPublicas_Model();
         return $result;
     }
-
-
-
-
     /**
      * 
      */
@@ -53,8 +68,6 @@ class adminController extends adminModel
         return $res;
 
     }
-
-
     /**
      * 
      */
@@ -106,8 +119,8 @@ class adminController extends adminModel
         $dataModel -> password = $data->txtPassword;
         $dataModel -> nombre =$data->txtNombre;
         $dataModel -> apellido = $data->txtApellido;
-        $dataModel -> fecha_nacimiento = '';
-        $dataModel -> url_foto = '';
+        $dataModel -> fecha_nacimiento = '2000-12-12';
+        $dataModel -> url_foto = 'test.jpg';
         $dataModel -> estado = 1;
 
         $respuesta = adminModel::registrar_Model($dataModel);

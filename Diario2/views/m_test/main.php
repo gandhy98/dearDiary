@@ -4,4 +4,4 @@
 
     echo "<hr>";
 
-    var_dump(current_timestamp());
+    var_dump(time() . "_" . rand(1,100));

@@ -19,6 +19,37 @@
 
     }
 
+    elseif ($datos->id === "upload-fotoPerfil") {
+        # code...
+        $datos->foto = $_FILES["img_foto"];
+
+        $msj = [];
+        $result = [];
+
+        $result['eval1'] = false;
+
+        $res_foto = move_uploaded_file($datos->foto["tmp_name"], "./../public/img_perfil/perfil_{$_SESSION['data']['idusuario']}.jpg");
+
+        if($res_foto){
+            $result['eval1'] = true;
+            
+            $result['msj']["m1"]= "Se guardo la foto";
+            
+            $res = $obj_gandhy -> updateUrlFoto_Controller();
+            $result['msj']["m2"] = $res["msj"];
+            $result["eval2"] = $res["eval"];
+        } 
+
+        echo json_encode($result);
+    }
+
+    else if ($datos->id === "updateData_perfil") {
+        # code...
+        $response = $obj_gandhy->updatePerfilData_Controller($datos);
+
+        echo json_encode($response);
+    }
+
     else if ($datos->id === "verifyEmail"){
         
         $response = $obj_gandhy->verifyEmail_Controller($datos);
@@ -50,8 +81,8 @@
 
         $resperfil= $obj_gandhy -> editarPerfil_controller($datos);
 
-        $result->msj[] = $resPerfil["msj"]:
-        $result->msj[] = $resPerfil["eval"]:
+        $result->msj[] = $resPerfil["msj"];
+        $result->msj[] = $resPerfil["eval"];
 
         if($resPerfil["eval"]){
             $msj = "No se guardo imagen";

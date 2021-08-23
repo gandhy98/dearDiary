@@ -2,6 +2,53 @@ console.log("se cargo main.js")
 
 
 /**
+ * 
+ * @param {*} title 
+ * @param {*} position 
+ * @param {*} icon 
+ * @param {*} timer 
+ */
+function alert_normal(title, position, icon, timer) {
+    Swal.fire({
+        position,
+        icon,
+        title,
+        showConfirmButton: false,
+        timer
+    })
+}
+
+
+/**
+ * 
+ * @param {*} title 
+ * @param {*} position 
+ * @param {*} icon 
+ * @param {*} timer 
+ */
+function alert_mixin(title,position,icon,timer) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position,
+        showConfirmButton: false,
+        timer,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon,
+        title
+      })
+}
+
+
+
+
+/**
  * Función Fetch Api
  * 
  * @param {*} jsonData 
@@ -34,7 +81,7 @@ function envio_ajax(jsonData, fun, url) {
  * @param {*} fnRquest 
  * @param {*} url 
  */
-function envioFile_ajax(meth, jsonData, jsonFile, fnRquest, url){
+function envioFile_ajax( jsonData, jsonFile, fnRquest, url){
     let formData = new FormData();
 
     for(nameIN in jsonFile){   
@@ -44,7 +91,7 @@ function envioFile_ajax(meth, jsonData, jsonFile, fnRquest, url){
     formData.append("datas", JSON.stringify(jsonData));
 
     fetch(url,{
-        method: meth,
+        method: "POST",
         body: formData
     }).then( data => data.json())
     .then(data => {

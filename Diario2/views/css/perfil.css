@@ -62,3 +62,15 @@
 .containerP .side div:not(:first-child) {
     margin-top: 10px;
 }
+
+
+
+.perfil-cabecera{
+
+    background: rgba(68, 68, 68, 0.596);
+    margin-top: 15px;
+    padding: 50px 10%;
+    border: none;
+    border-radius: 15px;
+
+}

@@ -9,38 +9,110 @@ if($conAjax){
 
 class adminModel extends mainModel
 {
-    protected function consultar_datoUsuario(){
-        
-    }
 
-    protected function editarPerfil_Model(){
+    /**
+     * 
+     */
+    protected function updateUrlFoto_Model($data){
         $eval = false;
-        $msj = "No se inserto";
+        $data_res = [];
+        $msj_sys = [];
+        $msj_sys["m1"] = "No se actualizó url foto";
 
-        $verificar = $this->consultar_datoUsuario($data->idusuario);
-        
 
-            $query = "INSERT INTO 
-                    nota
-                    SET
-                    titulo = '{$data->nombre }',
-                    contenido = '{$data->apellido}',
-                    fecha_publicacion = {$data->fecha_nacimiento},
-                    url_foto = '{$data->url_foto}',
-                ";
-             
-            $res = mainModel::ejecutar($query);
+        $query = "UPDATE usuario SET url_foto = '$data->url_foto' WHERE idusuario = '$data->idusuario'";
 
-            if( $res->rowCount() > 0 ){
-                $eval = false;
-                $msj = "No se inserto la nota";
-                $val = true;
-                $msj = "Se inserto";
-            }
+        $response = mainModel::ejecutar($query);
 
-        return ["eval"=>$eval, "msj"=>$msj];
-  
+        if($response->rowCount() >= 1){
+            $eval = true;
+            $msj_sys['m1'] = "Se actualizó url foto";
+
+            $res_session = $this->actualizarSession_Model();
+            $msj_sys["m2"] = $res_session["msj"];
+            
+        }
+
+        return ["eval"=>$eval, "msj"=>$msj_sys, "data"=>$data_res];
+
     }
+
+
+    protected function actualizarSession_Model(){
+        $eval = false;
+        $msj_sys = 'No se actualizó sessión';
+        $idusuario = $_SESSION['data']['idusuario'];
+        $res_user = $this->obtenerUsuario_Model($idusuario);
+
+        if($res_user['eval']){
+            $_SESSION['data'] = $res_user['data'];
+            $eval = true;
+            $msj_sys = 'Se actualizó sessión';
+
+        }
+
+        return ['eval'=>$eval, "msj"=>$msj_sys];
+    }
+
+    /**
+     * 
+     */
+    protected function obtenerUsuario_Model($idusuario){
+        $eval = false;
+        $data_res = []; 
+        $msj_sys = "No se obtuvo usuario";
+        
+        $query = "SELECT * FROM usuario WHERE idusuario = '{$idusuario}' LIMIT 1";
+
+        $res_query = mainModel::ejecutar($query);
+
+        if($res_query->rowCount() >= 1){
+            $eval = true;
+            $msj_sys = "Se obtuvo el usuario";
+
+            $data_res = $res_query->fetch(PDO::FETCH_ASSOC); 
+        }
+
+        return ['eval'=>$eval, 'data'=>$data_res, 'msj'=>$msj_sys ];
+    }
+
+
+    /**
+     * 
+     */
+    protected function updatePerfilData_Model($data){
+        $eval = false;
+        $data_res = [];
+        $msj_sys = [];
+
+        $msj_sys["msj1"] = "No se actualizó";
+
+        $query = "UPDATE usuario SET 
+                    email = '{$data->email}',
+                    nombre = '{$data->nombre}',
+                    apellido = '{$data->apellido}',
+                    fecha_nacimiento = '{$data->fecha_nacimiento}'
+                    WHERE idusuario = '{$data->idusuario}' ";
+
+        $result = mainModel::ejecutar($query);
+
+        if($result->rowCount() >= 1){
+            $eval = true;
+            $msj_sys["msj1"] = "Se actualizó";
+
+            //se actualiza el session
+            $res_user = $this->obtenerUsuario_Model($data->idusuario);
+            $msj_sys["msj2"] = $res_user["msj"];
+
+            if($res_user["eval"]){
+                $_SESSION["data"] = $res_user["data"];
+            }
+        }
+
+        return ["eval"=>$eval, "msj"=>$msj_sys, "data"=>$data_res];
+
+    }
+
     /**
      * 
      */
@@ -62,9 +134,6 @@ class adminModel extends mainModel
         return ['eval'=>$eval, 'data'=>$data_res, 'msj'=>$msj_sys ];
 
     }
-
-
-
     /**
      * 
      */
@@ -233,6 +302,8 @@ class adminModel extends mainModel
                                                 password = '{$pass_encriptado}', 
                                                 nombre = '{$data->nombre}',
                                                 apellido = '{$data->apellido}',
+                                                fecha_nacimiento = '{$data->fecha_nacimiento}',
+                                                url_foto = '{$data->url_foto}',
                                                 estado = '{$data->estado}'
             ";
 

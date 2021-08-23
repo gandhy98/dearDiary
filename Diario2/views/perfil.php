@@ -17,33 +17,84 @@
     ?>
 
 
-    
-    <div class="containerP">
-        <article class="content">
-                    <!-- FOTO PERFIL -->
-            <section class="cuerpoPerfil">
-                <div class="text-center contImagen centrar">
-                    <img src="..." class="rounded" alt="...">          
-                </div>
-                <button type="button" class="botPosicion " data-bs-toggle="modal" 
-                    data-bs-target="#editarPerfil"    
-                >
-                    editar perfil
-                </button>
+    <?php 
 
-                <!-- Modal editar y agregar perfil -->
-                <?php
-                    include("./views/components/editPerfil-modal.html");
-                ?>
-        <!-- las notas solo del usuario (privadas y publicas)-->
-            </section>
-        </article>
-        <aside class="side">
-            <div>nombre: </div>
-            <div>apellido: </div>
-            <div>fecha nacimientos: </div>
-  
-        </aside>
+        // var_dump($_SESSION["data"]);
+        $usuario = $_SESSION["data"];
+
+    ?>
+
+
+    <div class="container py-3 text-white perfil-cabecera">
+
+        <div class="row">
+            <div class="col-md-5 text-center">
+                <!-- FOTO PERFIL -->
+                <img src="./public/img_perfil/<?=$usuario["url_foto"]?>?<?=time() . "_" . rand(1,100)?>" 
+                    class="rounded mx-auto d-block img-fluid mb-2" 
+                    alt="..."
+                    width="200px"
+                    heigth="200px"
+                >
+
+                <input type="file" 
+                    name="foto_perfil" 
+                    class="img_foto"
+                >
+                <input type="button" 
+                    class="btn btn-secondary my-1" 
+                    value="SUBIR FOTO"
+                    onclick="subirFotoPerfil()"
+                >
+
+            </div>
+
+            <div class="col-md-7">
+                <!-- DATOS PERFIL -->
+                <div class="mb-3">
+                    <label for="exampleFormControlInput0" class="form-label">Nombre</label>
+                    <input type="text" 
+                        class="form-control txt_nombre" 
+                        id="exampleFormControlInput0" 
+                        placeholder="Ingrese nombre"
+                        value="<?= $usuario["nombre"] ?>";
+                        onchange="updatePerfil_data()"    
+                    >
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Apellido</label>
+                    <input type="text" 
+                        class="form-control txt_apellido" 
+                        id="exampleFormControlInput1" 
+                        placeholder="Ingrese apellido"
+                        value="<?= $usuario["apellido"] ?>"
+                        onchange="updatePerfil_data()"     
+                    >
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput2" class="form-label">Correo Electrónico</label>
+                    <input type="email" 
+                        class="form-control txt_email" 
+                        id="exampleFormControlInput2" 
+                        placeholder="Ingrese Email"
+                        value="<?= $usuario["email"] ?>"
+                        onchange="updatePerfil_data()" 
+                    >
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput3" class="form-label">
+                        Fecha nacimento
+                    </label>
+                    <input type="date" 
+                        class="form-control txt_fechaNacimiento" 
+                        id="exampleFormControlInput3" 
+                        value="<?= $usuario["fecha_nacimiento"] ?>" 
+                        onchange="updatePerfil_data()" 
+                    >
+                </div>
+            </div>
+        </div>
+
     </div>
 
         <!-- boton notas -->
