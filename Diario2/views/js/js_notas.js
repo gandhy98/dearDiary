@@ -1,5 +1,61 @@
 console.log("se cargo js_notas.js")
 
+/**
+ * MODULO LIKES DE NOTAS
+ */
+function updatelikeNota(idnote) {
+
+    /**
+     * idnote
+     */
+
+    let num_idnota = ".like-"+idnote;
+    let span_like = document.querySelector(num_idnota);
+
+    envio_ajax({
+            id:"get-like",
+            idnote
+        },
+        res=>{
+            console.log(res)
+
+            span_like.innerText = res.data.cant;
+            // if(res.eval){
+            //     alert_normal(res.msj.m1, "center", "success", 1200);
+            //     updatelikeNota(idnote);
+            // }
+        },
+        "./ajax/ajaxProcesar.php"
+    );
+
+
+}
+
+function addLikeNote(idnote) {
+    /**
+     * idnota
+     * idpersona
+     * 
+     */
+
+    envio_ajax({
+            id:"add-like",
+            idnote
+        },
+        res=>{
+            console.log(res)
+            if(res.eval){
+                alert_normal(res.msj.m1, "center", "success", 1200);
+                updatelikeNota(idnote);
+            }
+        },
+        "./ajax/ajaxProcesar.php"
+    );
+
+
+}
+
+
 
 
 /**

@@ -1,5 +1,23 @@
 console.log("se cargo js_login.js")
 
+function verificarRespuesta() {
+    event.preventDefault();
+    let rcpColor = document.querySelector(".rcpColor").value
+    let rcpMascota = document.querySelector(".rcpMascota").value
+
+    envio_ajax({
+            id: 'verifyAnswer',
+            rcpColor,
+            rcpMascota
+        }, (res) => {
+            console.log(res);
+            document.querySelector(".rcpColor").value = "";
+            document.querySelector(".rcpMascota")
+        },
+        './ajax/ajaxProcesar.php'
+    );
+}
+
 function verficaCorreo() {
     event.preventDefault();
     let txtVerificarCorreo = document.querySelector(".txtVerificarCorreo").value;
@@ -22,7 +40,12 @@ function verficaCorreo() {
     );
 }
 
+
+/**
+ * 
+ */
 function ingresar_login() {
+
     event.preventDefault();
 
     let logCorreo = document.querySelector(".logCorreo").value;
@@ -34,20 +57,34 @@ function ingresar_login() {
         logPassword,
     }
 
-    envio_ajax(jsonData, (res) => {
+    // si los datos ingresados se corresponden al formulario
+    if(validarEmail(logCorreo) && logPassword.length != 0 ){
+        
+        envio_ajax(jsonData, (res) => {
+    
+                console.log(res);
+    
+                document.querySelector(".logCorreo").value = "";
+                document.querySelector(".logPassword").value = "";
+    
+                if (res) {
+                    alert_normal("LOGENADO...!!","center","success",1500);
+                    setTimeout(() => {
+                        location.reload()
+                        // location.href = "?app=principal";
+                    }, 1000);
+                }
+    
+    
+            },
+            './ajax/ajaxProcesar.php');
 
-            console.log(res);
+    }else {
 
-            document.querySelector(".logCorreo").value = "";
-            document.querySelector(".logPassword").value = "";
+        alert_normal("Corregir datos!!","center","error",1500);
+    }
 
-            if (res) {
-                location.href = "?app=principal";
-            }
-
-
-        },
-        './ajax/ajaxProcesar.php');
 
 
 }
+
