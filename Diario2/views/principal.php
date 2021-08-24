@@ -38,24 +38,40 @@
 
         <section class="pt-4">
 
-        <div class="row row-cols-1 row-cols-md-2 g-4">
+          <div class="row row-cols-1 row-cols-md-2 g-4">
 
             <?php 
-
-              $resnotas = $obj -> obtenerNotasPublicas_Controller();
+              // NIVEL DE USUARIO PUBLIC = 2
+              $resnotas = $obj -> obtenerNotasPublicas_Controller(2, false);
               
               // var_dump($resnotas['data'][0]);
-
+              
               if($resnotas["eval"]){
-
+                
                 $notas = $resnotas['data'];
+                // var_dump($notas[0]);
+
+                // die();
                 foreach ($notas as $nota) {
                   # code...
-                  // var_dump($nota);
             ?>
 
             <div class="col">
               <div class="card">
+
+                <div class="px-3">
+                  <small class="">
+                    <img 
+                      src="./public/img_perfil/<?= $nota['url_foto_user'] ?>" 
+                      height="50px" width="43" 
+                      class="rounded-circle"
+                      alt=""  >
+                    <?= $nota['nombre'] ?> <?= $nota['apellido'] ?>
+                  </small>
+                  <br>
+                  <a href="?app=perfil_visit&cod=<?= $nota['usuario_idusuario'] ?>">ver perfil</a>
+                </div>
+                
                 <img src="./public/img_note/<?= $nota['url_foto'] ?>" 
                   class="card-img-top " 
                   height="100%"
@@ -70,13 +86,14 @@
                 </div>
                   <div class="card-footer">
                     <span>
-                      <a href="#" class="">
+                      <a href="#odasoda" class="">
                         <img src="./views/public/icons/like.png" 
                           width="25px"
                           alt=""
+                          onclick="addLikeNote(<?= $nota['idnota'] ?>)"                          
                         >
                       </a>
-                        +5
+                        +<span class="like-<?= $nota['idnota'] ?>"> <?= $nota['cantlike'] ?> </span>
                     </span>
 
                     <span>
@@ -142,9 +159,6 @@
 
 
         </section>
-
-
-
 
     </div>
       

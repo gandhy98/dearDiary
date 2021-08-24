@@ -11,6 +11,34 @@ class adminController extends adminModel
 {
 
     /**
+     * MOD. GET LIKES
+     */
+    public function getLikesNote_Controller($data){
+        $dataModel = new StdClass;
+        $dataModel->nota_idnota = $data->idnote;
+
+        $response = self::getLikesNote_Model($dataModel);
+
+        return $response;        
+
+    }
+
+    /**
+     * MOD. ADD LIKE
+     */
+    public function addlikeNote_Controller($data){
+        $dataModel = new StdClass;
+        $dataModel->usuario_idusuario = $_SESSION["data"]["idusuario"];
+        $dataModel->nota_idnota = $data->idnote;
+
+        $response = self::addlikeNote_Model($dataModel);
+
+        return $response;
+
+    }
+
+
+    /**
      * MODULO VISITA PERFIL
      */
     public function obtenerPerfilVisita_Controller($idusuario_v){
@@ -85,8 +113,8 @@ class adminController extends adminModel
     /**
      * 
      */
-    public function obtenerNotasPublicas_Controller(){
-        $result = self::obtenerNotasPublicas_Model();
+    public function obtenerNotasPublicas_Controller($tipo_user, $privado){
+        $result = self::obtenerNotasPublicas_Model($tipo_user, $privado);
         return $result;
     }
     /**
@@ -107,6 +135,17 @@ class adminController extends adminModel
 
         return $res;
 
+    }
+    /**
+    * 
+    */
+    public function verifyAnsawer_controller($data){
+        $dataModel = new stdClass;
+        $dataModel-> respuesta1 = $data -> rcpColor;
+        $dataModel-> respuesta2 = $data -> rcpMascota;
+
+        $response = adminModel::verifyAnswer_Model($dataModel);
+        return $response;
     }
     /**
      * 

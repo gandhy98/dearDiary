@@ -11,6 +11,57 @@ class adminModel extends mainModel
 {
 
     /**
+     * MOD. GET LIKES
+     */
+    protected function getLikesNote_Model($data){
+        $data_res = [];
+        $eval = false;
+        $msj_sys = [];
+
+        $msj_sys["m1"] = "No se obtuvo like";
+
+        $query = "SELECT * FROM calificacion 
+                    WHERE nota_idnota = '$data->nota_idnota'
+                ";
+
+        $res_query = mainModel::ejecutar($query);
+        $data_res["cant"] = 0;
+        if($res_query->rowCount() >= 1){
+            $data_res["cant"] = $res_query->rowCount();
+            $eval = true;
+            $msj_sys["m1"] = "Se obtuvo like";
+        }
+
+        return [ "eval"=>$eval, "msj"=>$msj_sys, "data"=>$data_res ];
+    }
+
+    /**
+     * MOD. ADD LIKE
+     */
+    public function addlikeNote_Model($data){
+        $data_res = [];
+        $eval = false;
+        $msj_sys = [];
+
+        $msj_sys["m1"] = "No se inserto like";
+
+        $query = "INSERT calificacion SET 
+                    usuario_idusuario = '$data->usuario_idusuario',
+                    nota_idnota = '$data->nota_idnota'
+                ";
+
+        $res_query = mainModel::ejecutar($query);
+
+        if($res_query->rowCount() >= 1){
+            $eval = true;
+            $msj_sys["m1"] = "Se inserto like";
+        }
+
+        return [ "eval"=>$eval, "msj"=>$msj_sys, "data"=>$data_res ];
+    }
+
+
+    /**
      * MODIULO COMENTARIOS
      */
 
@@ -174,24 +225,49 @@ class adminModel extends mainModel
     }
 
     /**
-     * 
+     * $tipo_usar => 
+     * 1:privado
+     * 2:public
+     * $privado =>
+     * true: obtener notas privado,
+     * false: obtener notas publicas
      */
-    protected function obtenerNotasPublicas_Model(){
+    protected function obtenerNotasPublicas_Model($tipo_user, $privado){
         $eval = false;
         $data_res = [];
         $msj_sys = "No se obtuvo las notas";
         
-        $query = "SELECT nota.*, usuario.nombre, usuario.apellido, usuario.url_foto as url_foto_user 
-                    FROM nota inner join usuario 
-                    on nota.usuario_idusuario = usuario.idusuario 
-                    WHERE nota.estado = 2 
-                    ORDER BY nota.fecha_publicacion DESC
-                ";
+
+        if($privado){
+            $idusuario = $_SESSION['data']['idusuario'];
+            $query = "SELECT nota.*, usuario.nombre, usuario.apellido, usuario.url_foto as url_foto_user 
+                        FROM nota inner join usuario 
+                        on nota.usuario_idusuario = usuario.idusuario 
+                        WHERE nota.estado = $tipo_user 
+                        AND usuario.idusuario = '$idusuario'
+                        ORDER BY nota.fecha_publicacion DESC
+                    ";
+        }else{
+
+            $query = "SELECT nota.*, usuario.nombre, usuario.apellido, usuario.url_foto as url_foto_user 
+                        FROM nota inner join usuario 
+                        on nota.usuario_idusuario = usuario.idusuario 
+                        WHERE nota.estado = $tipo_user 
+                        ORDER BY nota.fecha_publicacion DESC
+                    ";
+        }
+
 
         $res_query = mainModel::ejecutar($query);
         if($res_query->rowCount() >= 1){
+            $objcant = new StdClass;
             while ($elem_doc = $res_query->fetch(PDO::FETCH_ASSOC)) {
-                $data_res[] = $elem_doc;
+
+                $objcant->nota_idnota = $elem_doc['idnota'];
+                $data_like = $this->getLikesNote_Model($objcant); 
+                $cant = ["cantlike"=>$data_like["data"]["cant"]];
+
+                $data_res[] = array_merge($elem_doc, $cant);
             }
             $eval = true;
             $msj_sys = "Se obtenieron la notas";
@@ -296,12 +372,22 @@ class adminModel extends mainModel
 
         return ["val" => $val, "msj" => $msj];
     }
+    /**
+     * 
+     */
+    public function verifyAnswer_Model($data){
+
+        $val = false;
+        $msj = "no existe";
+
+        
+    }
 
 
     /**
      * 
      */
-    protected function verifyEmail_Model($data){
+    public function verifyEmail_Model($data){
         $val= false;
         $msj = "no existe";
         $query = "SELECT * FROM usuario WHERE email='{$data->email}'";

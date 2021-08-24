@@ -20,6 +20,27 @@
     }
 
     /**
+     * GET LIKES
+     */
+    elseif ($datos->id === "get-like") {
+        # code...
+        $response = $obj_gandhy->getLikesNote_Controller($datos);
+        echo json_encode($response);
+    }
+
+
+    /**
+     * ADD LIKE
+     */
+    elseif ($datos->id === "add-like") {
+        # code...
+
+        $response = $obj_gandhy->addlikeNote_Controller($datos);
+
+        echo json_encode($response);
+    }
+
+    /**
      * INSERTANDO COMENTARIOS
      */
     elseif ($datos->id === "insertar-comentario") {
@@ -61,6 +82,12 @@
     else if ($datos->id === "updateData_perfil") {
         # code...
         $response = $obj_gandhy->updatePerfilData_Controller($datos);
+
+        echo json_encode($response);
+    }
+    else if ($datos->id === "verifyAnswer"){
+
+        $response = $obj_gandhy->verifyAnsawer_controller($datos);
 
         echo json_encode($response);
     }
