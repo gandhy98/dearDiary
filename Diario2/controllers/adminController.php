@@ -11,6 +11,31 @@ class adminController extends adminModel
 {
 
     /**
+     * MODULO SEGUIR
+     */
+    public function seguirPerfil_Controller($data){
+        $dataModel = new StdClass;
+        $dataModel->usuario_idusuario = $_SESSION["data"]["idusuario"];
+        $dataModel->usuario_idusuario1 = $data->iduserperfil;
+
+        $response = self::seguirPerfil_Model($dataModel);
+
+        return $response;
+
+    }
+
+    public function siguiendoPerfil_Controller($data){  
+        $dataModel = new StdClass;
+        $dataModel->usuario_idusuario = $_SESSION["data"]["idusuario"];
+        $dataModel->usuario_idusuario1 = $data->iduserperfil;
+
+        $response = self::siguiendoPerfil_Model($dataModel);
+
+        return $response;     
+    }
+
+
+    /**
      * MOD. GET LIKES
      */
     public function getLikesNote_Controller($data){
@@ -113,8 +138,8 @@ class adminController extends adminModel
     /**
      * 
      */
-    public function obtenerNotasPublicas_Controller($tipo_user, $privado){
-        $result = self::obtenerNotasPublicas_Model($tipo_user, $privado);
+    public function obtenerNotasPublicas_Controller($iduser, $tipo_user, $privado){
+        $result = self::obtenerNotasPublicas_Model($iduser, $tipo_user, $privado);
         return $result;
     }
     /**

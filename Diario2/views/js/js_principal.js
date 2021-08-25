@@ -23,7 +23,6 @@ function entrarNotas() {
 
 
 function salir() {
-    alert("se hizo click")
 
     // empaquetando los datos
     const jsonData = {
@@ -36,7 +35,13 @@ function salir() {
 
             console.log(res);
             if (res) {
-                location.href = "?app=login";
+
+                alert_normal("Gracias por la visita, hasta pronto", "center", "info", 3000)
+
+                setTimeout(() => {
+                    location.href = "?app=login";
+                }, 1100);
+
             }
 
         },

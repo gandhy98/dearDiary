@@ -20,11 +20,11 @@
             <nav>
                 <form action="#" method="post" class="">
 
-                    <input type="text" class="input1 margenes txtNombre" value="" name="nombre" placeholder="Ingrese Nombre" > <br>
-                    <input type="text" class="input1 margenes txtApellido" name="apellido" placeholder="Ingrese Apeliido"> <br>
+                    <input type="text" class="input1 margenes txtNombre" value="" name="nombre" placeholder="Ingrese Nombre" required/> <br>
+                    <input type="text" class="input1 margenes txtApellido" name="apellido" placeholder="Ingrese Apeliido" required/> <br>
                     <input type="email" class="input1 margenes txtCorreo" name="correo" placeholder="Gmail"> <br>
-                    <input type="password" class="input1 margenes txtPassword" name="password" placeholder="crear password"> <br>
-                    <input type="password" class="input1 margenes txtPassword2" name="confir_password" placeholder="confirme password"> <br>
+                    <input type="password" class="input1 margenes txtPassword" name="password" placeholder="crear password" required/> <br>
+                    <input type="password" class="input1 margenes txtPassword2" name="confir_password" placeholder="confirme password" required/> <br>
 
                     <div class="margenes centrar ">
                         <input type="submit" class="boton" onClick="registarse();" value="Registrate">

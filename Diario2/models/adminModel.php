@@ -11,6 +11,87 @@ class adminModel extends mainModel
 {
 
     /**
+     * seguirPerfil_Model
+     */
+    protected function seguirPerfil_Model($data){
+        $data_res = [];
+        $eval = [];
+        $msj_sys = [];
+
+        $eval["v1"] = true;
+
+        $msj_sys["m1"] = "no se inserto registro (select)";
+        $msj_sys["m3"] = "no se elimino registro (delet)";
+
+        // verifica si ya se esta siguiendo el perfil
+        $res_siguiendo = $this->siguiendoPerfil_Model($data);
+        $msj_sys["m2"] = $res_siguiendo["msj"];
+
+        if($res_siguiendo["eval"] === false){
+            
+            $query = "INSERT INTO 
+                        seguiendo 
+                        SET  
+                        usuario_idusuario = '$data->usuario_idusuario',
+                        usuario_idusuario1 = '$data->usuario_idusuario1'
+                    ";
+    
+            $res_query = mainModel::ejecutar($query);
+    
+            if($res_query->rowCount() >= 1){
+                $eval["v1"] = true;
+                $msj_sys["m1"] = "se inserto registro (select)";
+            }
+
+        }else{
+
+            $query = "DELETE FROM
+                        seguiendo 
+                        WHERE
+                        usuario_idusuario = '$data->usuario_idusuario'
+                        AND
+                        usuario_idusuario1 = '$data->usuario_idusuario1'
+                    ";
+    
+            $res_query = mainModel::ejecutar($query);
+    
+            if($res_query->rowCount() >= 1){
+                $eval["v1"] = true;
+                $msj_sys["m3"] = "se elimino registro (delet)";
+            }
+
+        }
+
+
+        return [ "eval"=>$eval, "msj"=>$msj_sys, "data"=>$data_res ];
+    }
+
+    protected function siguiendoPerfil_Model($data){
+        $data_res = [];
+        $eval = false;
+        $msj_sys = [];
+
+        $msj_sys["m1"] = "No sigue el perfil";
+
+        $query = "SELECT * 
+                    FROM seguiendo 
+                    WHERE usuario_idusuario = '$data->usuario_idusuario' 
+                    AND usuario_idusuario1 = '$data->usuario_idusuario1'
+                    LIMIT 1
+                ";
+
+        $res_query = mainModel::ejecutar($query);
+
+        if($res_query->rowCount() >= 1){
+            $eval = true;
+            $msj_sys["m1"] = "siguiendo perfil";
+        }
+
+        return [ "eval"=>$eval, "msj"=>$msj_sys, "data"=>$data_res ];
+    }
+
+
+    /**
      * MOD. GET LIKES
      */
     protected function getLikesNote_Model($data){
@@ -225,36 +306,50 @@ class adminModel extends mainModel
     }
 
     /**
-     * $tipo_usar => 
+     * $tipo_nota => 
+     * 0:eliminado
      * 1:privado
      * 2:public
+     * 
      * $privado =>
-     * true: obtener notas privado,
+     * true: obtener notas privadas,
      * false: obtener notas publicas
      */
-    protected function obtenerNotasPublicas_Model($tipo_user, $privado){
+    protected function obtenerNotasPublicas_Model($idusuario, $tipo_nota, $privado){
         $eval = false;
         $data_res = [];
         $msj_sys = "No se obtuvo las notas";
         
 
-        if($privado){
-            $idusuario = $_SESSION['data']['idusuario'];
+        if($privado === 0){
+            // trae todas las notas de todos los usuarios, pero solo privado o solo pulbico, no ambos
             $query = "SELECT nota.*, usuario.nombre, usuario.apellido, usuario.url_foto as url_foto_user 
                         FROM nota inner join usuario 
                         on nota.usuario_idusuario = usuario.idusuario 
-                        WHERE nota.estado = $tipo_user 
+                        WHERE nota.estado = $tipo_nota 
+                        ORDER BY nota.fecha_publicacion DESC
+                    ";
+        }
+        elseif($privado === 1){
+            // trae las notas de un solo usuario, pero solo privado o solo pulbico, no ambos
+            $query = "SELECT nota.*, usuario.nombre, usuario.apellido, usuario.url_foto as url_foto_user 
+                        FROM nota inner join usuario 
+                        on nota.usuario_idusuario = usuario.idusuario 
+                        WHERE nota.estado = $tipo_nota 
                         AND usuario.idusuario = '$idusuario'
                         ORDER BY nota.fecha_publicacion DESC
                     ";
-        }else{
-
+        }
+        else{
+            // $privado === 2
+            // trae las notas de un solo usuario, con las notas publicas y privadas 
             $query = "SELECT nota.*, usuario.nombre, usuario.apellido, usuario.url_foto as url_foto_user 
                         FROM nota inner join usuario 
                         on nota.usuario_idusuario = usuario.idusuario 
-                        WHERE nota.estado = $tipo_user 
+                        WHERE usuario.idusuario = '$idusuario'
                         ORDER BY nota.fecha_publicacion DESC
                     ";
+            
         }
 
 

@@ -63,14 +63,29 @@
     margin-top: 10px;
 }
 
-
-
-.perfil-cabecera{
-
+.perfil-cabecera {
     background: rgba(68, 68, 68, 0.596);
     margin-top: 15px;
     padding: 50px 10%;
     border: none;
     border-radius: 15px;
+}
 
+
+/*imagen redonda*/
+
+.circular--square {
+    border-radius: 60%;
+}
+
+.circular--square {
+    border-top-left-radius: 40% 50%;
+    border-top-right-radius: 40% 50%;
+    border-bottom-right-radius: 40% 50%;
+    border-bottom-left-radius: 40% 50%;
+}
+
+.marge {
+    margin: 10px 2px;
+    padding: 4px;
 }

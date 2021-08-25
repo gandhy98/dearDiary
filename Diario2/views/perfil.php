@@ -134,7 +134,7 @@
 
             <?php 
               // NIVEL DE USUARIO PRIVADA = 1
-              $resnotas = $obj -> obtenerNotasPublicas_Controller(1, true);
+              $resnotas = $obj -> obtenerNotasPublicas_Controller($_SESSION["data"]["idusuario"], 1, 2);
               
               // var_dump($resnotas['data'][0]);
               
@@ -170,7 +170,7 @@
                   alt="..."
                 >
                 <div class="card-body">
-                  <small class="text-muted"><?= $nota['fecha_publicacion'] ?></small>
+                  <small class="text-muted"><?= $nota['fecha_publicacion'] ?> (<?= $nota['estado']==2?"public":"private" ?>)</small>
                   <h5 class="card-title"><?= $nota['titulo'] ?></h5>
                   <p class="card-text">
                     <?= $nota['contenido'] ?>
@@ -204,6 +204,7 @@
                 </div>
 
             </div>
+
 
             <?php
               } // FIN DEL FOREACH

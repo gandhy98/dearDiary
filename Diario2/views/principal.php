@@ -42,7 +42,7 @@
 
             <?php 
               // NIVEL DE USUARIO PUBLIC = 2
-              $resnotas = $obj -> obtenerNotasPublicas_Controller(2, false);
+              $resnotas = $obj -> obtenerNotasPublicas_Controller("", 2, 0);
               
               // var_dump($resnotas['data'][0]);
               
@@ -78,7 +78,7 @@
                   alt="..."
                 >
                 <div class="card-body">
-                  <small class="text-muted"><?= $nota['fecha_publicacion'] ?></small>
+                  <small class="text-muted"><?= $nota['fecha_publicacion'] ?> <span class="text-primary">(<?= $nota['estado']==2?"public":"private" ?>)</span></small>
                   <h5 class="card-title"><?= $nota['titulo'] ?></h5>
                   <p class="card-text">
                     <?= $nota['contenido'] ?>

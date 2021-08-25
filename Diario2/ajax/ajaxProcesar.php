@@ -20,6 +20,22 @@
     }
 
     /**
+     * MODULO SEGUIDOR
+     */
+    elseif ($datos->id === "seguir-perfil"){
+        $response = $obj_gandhy->seguirPerfil_Controller($datos);
+        echo json_encode($response);
+    }
+
+    elseif ($datos->id === "state-seguidor") {
+        # code...
+
+        $response = $obj_gandhy -> siguiendoPerfil_Controller($datos);
+
+        echo json_encode($response);
+    }
+
+    /**
      * GET LIKES
      */
     elseif ($datos->id === "get-like") {
