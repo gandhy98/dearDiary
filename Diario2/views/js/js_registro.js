@@ -26,39 +26,33 @@ function registarse() {
             txtPassword2
         }
 
+        if (validarEmail(txtCorreo) && txtPassword.length > 6 && txtPassword2.length > 6 && txtNombre.length != 0 && txtApellido.length != 0) {
 
-        envio_ajax(jsonData, (res) => {
-                /**
-                 * result the server
-                 */
-                // console.log(res);
+            envio_ajax(jsonData, (res) => {
 
-                if (res.val) {
-                    /** 
-                     * clear the form
-                     */
+                    console.log(res);
+
                     document.querySelector(".txtNombre").value = "";
                     document.querySelector(".txtApellido").value = "";
                     document.querySelector(".txtCorreo").value = "";
                     document.querySelector(".txtPassword").value = "";
                     document.querySelector(".txtPassword2").value = "";
 
-                    /**
-                     * redir an other page
-                     */
-                    location.href = "?app=login";
-
-                } else {
-                    alert(res.msj);
-                }
-
-            },
-            './ajax/ajaxProcesar.php');
+                    if (res) {
+                        alert_normal("registro exitoso", "center", "success", 1500);
+                        setTimeout(() => {
+                            //ocation.reload()
+                            location.href = "?app=login";
+                        }, 1000);
+                    }
 
 
+                },
+                './ajax/ajaxProcesar.php');
 
-    } else {
-        alert("el password no es el mismo")
+        } else {
+
+            alert_normal("contraseña tiene que ser mayor a 6 digitos, llene corectamente", "center", "error", 1500);
+        }
     }
-
 }
