@@ -54,5 +54,7 @@ function registarse() {
 
             alert_normal("contraseña tiene que ser mayor a 6 digitos, llene corectamente", "center", "error", 1500);
         }
+    } else {
+        alert("la contraseña no coinciden")
     }
 }
