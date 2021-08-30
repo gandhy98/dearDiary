@@ -162,18 +162,20 @@ class adminController extends adminModel
 
     }
     /**
-    * 
+    * N°2
     */
-    public function verifyAnsawer_controller($data){
+    public function verifyPregunta_controller($data){
         $dataModel = new stdClass;
         $dataModel-> respuesta1 = $data -> rcpColor;
         $dataModel-> respuesta2 = $data -> rcpMascota;
+        $dataModel->idusuario = $_SESSION['idusuario'];
+        $dataModel->estado= 1;
 
-        $response = adminModel::verifyAnswer_Model($dataModel);
+        $response = adminModel::verifyPregunta_Model($dataModel);
         return $response;
     }
     /**
-     * 
+     * N°1 
      */
     public function verifyEmail_Controller($data){
         $dataModel = new stdClass;
@@ -181,6 +183,18 @@ class adminController extends adminModel
         $dataModel -> email = $data-> txtVerificarCorreo;
 
         $response = adminModel::verifyEmail_Model($dataModel);
+
+        return $response;
+    }
+     /**
+     * N° 3
+     */
+    public function updatePass_controller($data){
+        $dataModel = new stdClass;
+        $dataModel -> password = $data -> txtRecPassword;
+        $dataModel->idusuario = $_SESSION['idusuario'];
+        $dataModel->estado= 1;
+        $response = adminModel::updatePass_Model($dataModel);
 
         return $response;
     }
@@ -253,17 +267,32 @@ class adminController extends adminModel
         $arr_app = ["portada"];
         
         if($this->verificar_session()){
+            //retrive password
+            if($_SESSION['retrive']){
+                $retrive_pass = array_merge($arr_app, ["preguntaPass", "recuperarPass"]);
+                if(in_array($intro_app, $retrive_pass)){
+                    return $intro_app.".php";  
+                }
+                else{
+                    session_destroy();
+                    return "portada.php";
+                }   
 
-            $arr_app = array_merge($arr_app, ["perfil_visit","perfil", "principal","salir","notas", "m_test/main"]);
-
-            if(in_array($intro_app, $arr_app)){
-                return $intro_app.".php";
             }else{
-                return "principal.php";
+                //
+                $arr_app = array_merge($arr_app, ["perfil_visit","perfil", "principal","salir","notas", "m_test/main"]);
+                
+                if(in_array($intro_app, $arr_app)){
+                    return $intro_app.".php";
+                    
+                }
+                else{
+                    return "principal.php";
+                }          
+            
             }
-
         }else{
-            $arr_app = array_merge($arr_app, ["login", "registro","recuperarPass"]);
+            $arr_app = array_merge($arr_app, ["login", "registro"]);
             if(in_array($intro_app, $arr_app)){
                 return $intro_app.".php";
             }else{

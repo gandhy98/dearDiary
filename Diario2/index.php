@@ -1,6 +1,7 @@
 <?php
     session_start();
     
+    // errores si: 1, no:0
     // error_reporting(0);
 
     $conAjax = false;

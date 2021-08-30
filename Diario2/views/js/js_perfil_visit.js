@@ -63,6 +63,9 @@ function seguirUser(iduserperfil) {
 
 window.onload = () => {
     // alert("se cargo la mamada");
+    let pgperfil = document.querySelector("#perfil_visit_view");
+    if (pgperfil) {
+        obtenerEstadoSeguidor(_iduser);
+    }
 
-    obtenerEstadoSeguidor(_iduser);
 }

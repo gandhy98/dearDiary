@@ -7,28 +7,27 @@ console.log("se cargo js_perfil.js")
  */
 
 //
-function subirFotoPerfil(){
+function subirFotoPerfil() {
 
     let img_foto = document.querySelector(".img_foto").files[0];
 
     envioFile_ajax({
-        id:"upload-fotoPerfil"
-    },
-    {
-        img_foto
-    },
-    res => {
-        console.info(res)
-        if(res.eval1){
-            alert_normal('Se actualizó la foto perfil!','center','success', 1500 );
-            //recargadno la pagina despues de 1300 millisegundos
-            setTimeout(() => {
-                location.reload();
-            }, 1300);
-        }
+            id: "upload-fotoPerfil"
+        }, {
+            img_foto
+        },
+        res => {
+            console.info(res)
+            if (res.eval1) {
+                alert_normal('Se actualizó la foto perfil!', 'center', 'success', 1500);
+                //recargadno la pagina despues de 1300 millisegundos
+                setTimeout(() => {
+                    location.reload();
+                }, 1300);
+            }
 
-    },
-    "./ajax/ajaxProcesar.php"
+        },
+        "./ajax/ajaxProcesar.php"
     )
 
 }
@@ -45,23 +44,22 @@ function updatePerfil_data() {
         email,
         nombre,
         apellido,
-        fecha_nacimiento  
+        fecha_nacimiento
     });
 
-    envio_ajax(
-        {
-            id:"updateData_perfil",
+    envio_ajax({
+            id: "updateData_perfil",
             email,
             nombre,
             apellido,
-            fecha_nacimiento  
+            fecha_nacimiento
         },
-        res=>{
-            // console.log(res);
-            if(res.eval){
-                alert_mixin(res.msj.msj1,'bottom-end', 'success', 1200);
-            }else{
-                alert_mixin("no se actualizó",'bottom-end', 'error', 1200);
+        res => {
+            console.log(res);
+            if (res.eval) {
+                alert_mixin(res.msj.msj1, 'bottom-end', 'success', 1200);
+            } else {
+                alert_mixin("no se actualizóssss", 'bottom-end', 'error', 1200);
             }
         },
         "./ajax/ajaxProcesar.php"
@@ -137,7 +135,7 @@ function agrearPreguntas() {
                     //location.href = "?app=perfil";
 
             } else {
-                alert_normal('No se isnerto las preguntas!','center','error',1500 );
+                alert_normal('No se isnerto las preguntas!', 'center', 'error', 1500);
             }
 
         },

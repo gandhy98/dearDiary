@@ -8,7 +8,7 @@
         ?>
         <title>PERFIL | DIARY</title>
 </head>
-<body>
+<body id="perfil_visit_view">
     <!-- Footer pages -->
     <?php
         //var_dump($_SESSION['data']['nombre']);

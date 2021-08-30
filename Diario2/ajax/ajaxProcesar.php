@@ -101,18 +101,26 @@
 
         echo json_encode($response);
     }
-    else if ($datos->id === "verifyAnswer"){
-
-        $response = $obj_gandhy->verifyAnsawer_controller($datos);
-
-        echo json_encode($response);
-    }
-
+    /*email para recuperar pasword N°1*/
     else if ($datos->id === "verifyEmail"){
         
         $response = $obj_gandhy->verifyEmail_Controller($datos);
+    
+        echo json_encode($response);
+    }
+    /*verificando las preuntas N°2*/
+    else if ($datos->id === "verifyPregunta"){
 
-        echo json_encode($datos);
+        $response = $obj_gandhy->verifyPregunta_controller($datos);
+
+        echo json_encode($response);
+    }
+    /*email para recuperar pasword N°3*/
+    else if($datos->id === "updatePass"){
+
+        $response = $obj_gandhy->updatePass_controller($datos);
+
+        echo json_encode($response);
     }
     else if ($datos->id === "addQuestion") {
         # code...

@@ -277,7 +277,7 @@ class adminModel extends mainModel
         $data_res = [];
         $msj_sys = [];
 
-        $msj_sys["msj1"] = "No se actualizó";
+        $msj_sys["msj1"] = "No se actualizoo";
 
         $query = "UPDATE usuario SET 
                     email = '{$data->email}',
@@ -467,46 +467,110 @@ class adminModel extends mainModel
 
         return ["val" => $val, "msj" => $msj];
     }
+
     /**
-     * 
+     * consulta verificar email N°1
      */
-    public function verifyAnswer_Model($data){
+    public function verifyEmail_Model($data){
+        $query = "SELECT * FROM usuario WHERE email='{$data->email}' LIMIT 1";
+
+        $res = mainModel::ejecutar($query);
+        
+        $eval = false;
+
+        if($res->rowCount() > 0){
+
+            $user = $res->fetch(PDO::FETCH_ASSOC);
+
+            $_SESSION["retrive"] = true;
+            $_SESSION["app"] = true;
+            // $_SESSION["email"] = $user['email'];
+            $_SESSION["idusuario"] = $user['idusuario'];
+            $eval = true;                
+        }
+        return $eval;
+
+    }
+    /**
+     * consulta verificar preguntas N°2
+     */
+    public function verifyPregunta_Model($data){
 
         $val = false;
         $msj = "no existe";
 
+        //$verificar = $this->consultar_registro($data->idusuario);
+
+        //if($verificar["eval"] == true){
+            
+            //$val = false;
+            //$msj = "ya existe";
+
+           $query = "SELECT * from retrive_password
+                     where usuario_idusuario='{$data->idusuario}'
+                      and  pregunta = 'cual es tu color favorito' 
+                      and respuesta='{$data->respuesta1}'
+                ";
+
+            $res = mainModel::ejecutar($query);
+
+            $query1 = "SELECT * from retrive_password
+                        where usuario_idusuario='{$data->idusuario}'
+                        and  pregunta = 'cual es el nombre de tu mascota' 
+                        and respuesta='{$data->respuesta2}'
+                ";
+                 
+            $res1 = mainModel::ejecutar($query1);
+
+            if( $res->rowCount() > 0 && $res1->rowCount() > 0 ){
+                $val = true;
+                $msj = "si existe respuesta";
+            }
+            
+        //}
+        return ["val" => $val, "msj" => $msj];
         
     }
-
-
-    /**
+        /**
      * 
      */
-    public function verifyEmail_Model($data){
-        $val= false;
-        $msj = "no existe";
-        $query = "SELECT * FROM usuario WHERE email='{$data->email}'";
+    public function updatePass_Model($data){
+        $eval = false;
+        $msj = "no se actualizo";
 
-        $verEmail = mainModel::ejecutar($query);
+        $passEncriptado=mainModel::encriptar($data->password);
 
-        if($verEmail-> rowCount() > 0){
-            $val= true;
-            $msj = "si existe";
+        $query = "UPDATE usuario
+                    SET password = '{$passEncriptado}' 
+                    WHERE idusuario = '{$data->idusuario} ' 
+            ";
+        
+        $res = mainModel::ejecutar($query);
+        
+        if( $res->rowCount() > 0 ){
+            $eval = true;
+            $msj = "se actualizo la contraseña";
         }
-    
-        return ["val" => $val, "msj" => $msj];
+
+        if($eval){
+            session_destroy();
+        }
+
+        return ["eval" => $eval, "msj" => $msj];
 
     }
+
     /**
      * 
      */
     public function login_Model($data){
 
+        $msj_sys = "El usuario no existe";
+        $eval = false;
+
         $query = "SELECT * FROM usuario WHERE email='{$data->email}'";
 
-        $res = mainModel::ejecutar($query);
-        
-        $session = false;
+        $res = mainModel::ejecutar($query);        
 
         if($res->rowCount() > 0){
             while ($usuario = $res->fetch(PDO::FETCH_ASSOC)) {
@@ -514,16 +578,16 @@ class adminModel extends mainModel
                 if(mainModel::verificar_password($data->password, $usuario["password"])){
                     // session_start();
                     $_SESSION["app"] = true;
+                    $_SESSION['retrive'] = false;
                     $_SESSION["data"] = $usuario;
-                    $session = true;
-                }
-                else{
-                    alert("revise el correo o password");    
+
+                    $msj_sys = "el usuario existe";
+                    $eval = true;
                 }
                 
             }
         }
-        return $session;
+        return ["eval"=>$eval, "msj"=>$msj_sys];
     }
     /**
      * 

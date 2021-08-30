@@ -17,7 +17,7 @@
                     <input type="password" class="input1 margenes txtRecPassword2" name="confir_password" placeholder="confirme password"> <br>
 
                     <div class="margenes centrar ">
-                        <input type="submit" class="boton" onClick="registarse();" value="GUARDAR">
+                        <input type="submit" class="boton" onclick="updatePass()" value="GUARDAR"> <!--TEMPORAL salir()-->
                     </div>
 
                 </form>
@@ -25,6 +25,7 @@
     </section>
 
     <?php
+        // var_dump($_SESSION);
         include_once ("./views/pages/footer.html");
     ?>
 
